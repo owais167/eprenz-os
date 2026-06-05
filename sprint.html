@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Eprenz OS · Sprint Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--g:#1A3329;--gd:#0D2018;--bg:#F7F5F0;--dim:#EDE9E0;--s:#fff;--go:#C4943A;--b:#E8E4DA;--t:#0D1B14;--ts:#6B7B72;--tf:#9AA89E;--mo:#1A3329;--ca:#1E4976;--de:#5C3D8F;--ke:#B8761F;--da:#3D3530;--sol:#1E4976;--glb:#1A6B3A;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--t);-webkit-font-smoothing:antialiased;font-size:14px;line-height:1.6;}
+.topbar{background:var(--gd);padding:14px 40px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:99;}
+.tl{font-size:15px;font-weight:700;color:#fff;display:flex;align-items:center;gap:10px;}
+.tl em{color:var(--go);font-style:normal;}
+.tr{display:flex;gap:8px;}
+.tbtn{padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,0.2);background:transparent;color:rgba(255,255,255,0.7);}
+.tbtn.g{background:var(--go);border-color:var(--go);color:#fff;}
+.page{max-width:1220px;margin:0 auto;padding:36px 40px 80px;}
+.ph{margin-bottom:28px;padding-bottom:22px;border-bottom:1px solid var(--b);}
+.ph-tag{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--go);margin-bottom:10px;}
+.ph-title{font-size:30px;font-weight:800;color:var(--t);letter-spacing:-0.02em;margin-bottom:10px;}
+.ph-meta{display:flex;gap:20px;flex-wrap:wrap;}
+.pm{font-size:13px;color:var(--ts);}
+.pm strong{color:var(--t);font-weight:600;}
+.priority{background:var(--g);border-radius:10px;padding:16px 22px;margin-bottom:24px;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;}
+.pri{font-size:22px;}
+.pt{font-size:14px;font-weight:700;color:#fff;margin-bottom:3px;}
+.pd{font-size:13px;color:rgba(255,255,255,0.65);line-height:1.5;}
+.sec-lbl{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--tf);margin-bottom:10px;}
+/* PARTNER REF */
+.pr-box{background:var(--s);border:1px solid var(--b);border-radius:10px;padding:16px 20px;margin-bottom:22px;}
+.pr-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px;}
+.prc{border-radius:8px;padding:12px 14px;}
+.prc.s{background:rgba(30,73,118,0.06);border:1px solid rgba(30,73,118,0.2);}
+.prc.g{background:rgba(26,107,58,0.06);border:1px solid rgba(26,107,58,0.2);}
+.prc.a{background:rgba(184,118,31,0.06);border:1px solid rgba(184,118,31,0.2);}
+.prc-t{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:5px;}
+.prc.s .prc-t{color:var(--sol);}
+.prc.g .prc-t{color:var(--glb);}
+.prc.a .prc-t{color:var(--go);}
+.prc-n{font-size:13px;font-weight:700;color:var(--t);margin-bottom:3px;}
+.prc-d{font-size:12px;color:var(--ts);line-height:1.45;margin-bottom:6px;}
+.prc-r{font-size:11px;color:var(--t);font-weight:500;}
+/* TEAM */
+.team{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:18px;}
+.tc{border-radius:8px;padding:12px 14px;border:1px solid var(--b);background:var(--s);position:relative;overflow:hidden;}
+.tc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--c);}
+.tc-r{font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--c);margin-bottom:4px;}
+.tc-n{font-size:14px;font-weight:800;color:var(--t);}
+.tc-s{font-size:11px;color:var(--tf);margin-top:2px;}
+.legend{display:flex;gap:14px;margin-bottom:22px;flex-wrap:wrap;font-size:12px;}
+.ld{display:flex;align-items:center;gap:5px;font-weight:600;}
+.ldot{width:8px;height:8px;border-radius:50%;}
+/* GANTT */
+.gantt{background:var(--s);border:1px solid var(--b);border-radius:10px;overflow:hidden;margin-bottom:22px;}
+.gh{background:var(--g);padding:10px 20px;display:grid;grid-template-columns:130px repeat(8,1fr);gap:0;}
+.ghl{font-size:10px;font-weight:700;color:rgba(255,255,255,0.35);letter-spacing:0.1em;text-transform:uppercase;padding:2px 4px;}
+.ghw{text-align:center;font-size:10px;font-weight:600;color:rgba(255,255,255,0.7);}
+.ghw small{display:block;font-size:8px;color:rgba(255,255,255,0.3);font-weight:400;margin-top:1px;}
+.gph{padding:7px 20px;display:grid;grid-template-columns:130px repeat(8,1fr);align-items:center;gap:0;border-bottom:1px solid var(--b);}
+.gphl{font-size:9px;font-weight:700;color:var(--tf);letter-spacing:0.1em;text-transform:uppercase;}
+.pb{border-radius:3px;height:21px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;white-space:nowrap;}
+.gr{padding:5px 20px;display:grid;grid-template-columns:130px repeat(8,1fr);align-items:center;gap:0;border-top:1px solid #F0EDE6;}
+.grn{font-size:11px;font-weight:700;color:var(--t);display:flex;align-items:center;gap:5px;}
+.grd{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.tb{border-radius:3px;height:19px;margin:0 2px;display:flex;align-items:center;padding:0 5px;font-size:9px;font-weight:600;color:#fff;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+/* MILESTONES */
+.ms{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px;}
+.mc{background:var(--s);border:1px solid var(--b);border-radius:10px;padding:14px;position:relative;overflow:hidden;}
+.mc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--c);}
+.mc-day{font-size:20px;font-weight:800;color:var(--t);letter-spacing:-0.01em;line-height:1;}
+.mcl{font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--tf);margin-bottom:5px;}
+.mce{font-size:12px;font-weight:600;color:var(--t);margin-bottom:3px;}
+.mco{font-size:11px;color:var(--ts);}
+/* PHASES */
+.psec{margin-bottom:10px;border:1px solid var(--b);border-radius:10px;overflow:hidden;}
+.phd{padding:13px 20px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;}
+.phl{display:flex;align-items:center;gap:12px;}
+.phn{font-size:22px;font-weight:800;color:rgba(255,255,255,0.2);font-family:'JetBrains Mono',monospace;line-height:1;}
+.pht{font-size:14px;font-weight:700;color:#fff;}
+.phs{font-size:11px;color:rgba(255,255,255,0.5);margin-top:2px;}
+.phday{font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,0.4);}
+.phch{color:rgba(255,255,255,0.5);font-size:13px;transition:transform 0.2s;}
+.psec.open .phch{transform:rotate(180deg);color:rgba(255,255,255,0.9);}
+.pbody{display:none;}
+.psec.open .pbody{display:block;}
+.tg{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--b);}
+.pc{border-right:1px solid var(--b);}
+.pc:last-child{border-right:none;}
+.pch{padding:8px 12px;display:flex;align-items:center;gap:6px;background:var(--dim);border-bottom:1px solid var(--b);}
+.pchd{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.pchn{font-size:11px;font-weight:700;color:var(--t);}
+.pchr{font-size:9px;color:var(--tf);}
+.tlist{padding:10px 12px;}
+.ti{margin-bottom:8px;}
+.ti:last-child{margin-bottom:0;}
+.tin{font-size:12px;font-weight:600;color:var(--t);margin-bottom:2px;line-height:1.3;}
+.tid{font-size:11px;color:var(--ts);line-height:1.45;}
+.ti.c .tin::before{content:'⚡ ';}
+/* RULES */
+.rules{background:var(--g);border-radius:10px;padding:20px 24px;margin-bottom:24px;}
+.rules h3{font-size:14px;font-weight:700;color:#fff;margin-bottom:12px;}
+.rg{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.rule{background:rgba(255,255,255,0.06);border-radius:7px;padding:11px 13px;border-left:2px solid var(--go);}
+.rt{font-size:12px;font-weight:700;color:#fff;margin-bottom:2px;}
+.rd{font-size:11.5px;color:rgba(255,255,255,0.6);line-height:1.45;}
+footer{text-align:center;padding:28px;font-size:12px;color:var(--tf);border-top:1px solid var(--b);}
+@media(max-width:900px){.page{padding:20px;}.team,.ms,.pr-grid,.rg{grid-template-columns:1fr;}.gantt{overflow-x:auto;}.tg{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="tl">E <em>Eprenz.</em> <span style="color:rgba(255,255,255,0.25);margin:0 6px;">|</span> <span style="font-size:13px;font-weight:500;color:rgba(255,255,255,0.55);">Sprint Plan</span></div>
+  <div class="tr">
+    <div class="tbtn" onclick="window.open('eprenz_prototype.html','_blank')">Prototype</div>
+    <div class="tbtn" onclick="window.open('eprenz_report.html','_blank')">Report</div>
+  </div>
+</div>
+
+<div class="page">
+  <div class="ph">
+    <div class="ph-tag">Eprenz OS · Build Sprint</div>
+    <div class="ph-title">45–60 Day Team Plan</div>
+    <div class="ph-meta">
+      <div class="pm"><strong>Journey:</strong> Start · Grow · Profit · Exit</div>
+      <div class="pm"><strong>Team:</strong> 5 + David</div>
+      <div class="pm"><strong>First revenue:</strong> Day 35–45</div>
+      <div class="pm"><strong>Standup:</strong> 15 min async daily</div>
+    </div>
+  </div>
+
+  <div class="priority">
+    <div class="pri">◎</div>
+    <div>
+      <div class="pt">Priority #1: Compass. Everything else runs in parallel.</div>
+      <div class="pd">We already have years of survey data and responses. Compass is built on top of that existing foundation. Phase I and II lock this in. Partners, affiliates, and AI build alongside from Phase II.</div>
+    </div>
+  </div>
+
+  <div class="sec-lbl">Partner Model</div>
+  <div class="pr-box">
+    <div class="pr-grid">
+      <div class="prc s">
+        <div class="prc-t">🎯 Solution Partners</div>
+        <div class="prc-n">High-ticket specialists</div>
+        <div class="prc-d">Fractional CFOs, M&A Advisors, Legal Firms, Consultants, Coaches, Branding Agencies. Triggered by specific founder need.</div>
+        <div class="prc-r">Setup fee + per qualified lead + rev share</div>
+      </div>
+      <div class="prc g">
+        <div class="prc-t">🌐 Global Partners</div>
+        <div class="prc-n">Essential tools + platforms</div>
+        <div class="prc-d">Stripe, AWS, Xero, HubSpot, banking, payroll, comms. Needed by every founder. Recommended based on stack gaps.</div>
+        <div class="prc-r">Referral commissions via existing partner programs</div>
+      </div>
+      <div class="prc a">
+        <div class="prc-t">🤝 Affiliates</div>
+        <div class="prc-n">Member acquisition</div>
+        <div class="prc-d">Accelerators, schools, CA firms, coworking spaces. Refer founders into Eprenz. Separate from partner types.</div>
+        <div class="prc-r">Commission per member who completes Compass + active 30 days</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-lbl">Team</div>
+  <div class="team">
+    <div class="tc" style="--c:var(--mo);"><div class="tc-r">Frontend</div><div class="tc-n">Mohammed</div><div class="tc-s">Claude Code · Flutter · Next.js</div></div>
+    <div class="tc" style="--c:var(--ca);"><div class="tc-r">Backend</div><div class="tc-n">Canver</div><div class="tc-s">Supabase · API · Infra</div></div>
+    <div class="tc" style="--c:var(--de);"><div class="tc-r">AI Engineering</div><div class="tc-n">Deepu + Canver</div><div class="tc-s">Anthropic · RAG · Agents</div></div>
+    <div class="tc" style="--c:var(--ke);"><div class="tc-r">Sales, Partners, Affiliates</div><div class="tc-n">Kewin + Sales</div><div class="tc-s">Revenue · Outreach</div></div>
+    <div class="tc" style="--c:var(--da);"><div class="tc-r">Founder · Sign-off</div><div class="tc-n">David</div><div class="tc-s">Reviews end of each phase</div></div>
+  </div>
+  <div class="legend">
+    <div class="ld"><div class="ldot" style="background:var(--mo);"></div>Mohammed</div>
+    <div class="ld"><div class="ldot" style="background:var(--ca);"></div>Canver</div>
+    <div class="ld"><div class="ldot" style="background:var(--de);"></div>Deepu</div>
+    <div class="ld"><div class="ldot" style="background:var(--ke);"></div>Kewin</div>
+    <div class="ld"><div class="ldot" style="background:var(--da);"></div>David</div>
+    <div style="color:var(--tf);font-size:12px;">⚡ critical path</div>
+  </div>
+
+  <div class="sec-lbl">Sprint Timeline</div>
+  <div class="gantt">
+    <div class="gh">
+      <div class="ghl">Person</div>
+      <div class="ghw">Wk 1<small>D 1–7</small></div><div class="ghw">Wk 2<small>D 8–14</small></div>
+      <div class="ghw">Wk 3<small>D 15–21</small></div><div class="ghw">Wk 4<small>D 22–28</small></div>
+      <div class="ghw">Wk 5<small>D 29–35</small></div><div class="ghw">Wk 6<small>D 36–42</small></div>
+      <div class="ghw">Wk 7<small>D 43–49</small></div><div class="ghw">Wk 8<small>D 50–60</small></div>
+    </div>
+    <div class="gph">
+      <div class="gphl">Phases</div>
+      <div class="pb" style="grid-column:span 2;background:var(--g);margin:0 2px;font-size:9px;">I · Foundation + Compass</div>
+      <div class="pb" style="grid-column:span 2;background:var(--ca);margin:0 2px;font-size:9px;">II · Founder XP</div>
+      <div class="pb" style="grid-column:span 2;background:var(--go);margin:0 2px;font-size:9px;">III · Revenue</div>
+      <div class="pb" style="grid-column:span 1;background:var(--de);margin:0 2px;font-size:9px;">IV · AI</div>
+      <div class="pb" style="grid-column:span 1;background:var(--da);margin:0 2px;font-size:9px;">V · Launch</div>
+    </div>
+    <div class="gr"><div class="grn"><div class="grd" style="background:var(--mo);"></div>Mohammed</div><div class="tb" style="background:var(--mo);">App + Survey UI</div><div class="tb" style="background:var(--mo);">Compass flow</div><div class="tb" style="background:var(--mo);">Dashboard</div><div class="tb" style="background:var(--mo);">Path + Partners</div><div class="tb" style="background:var(--mo);">Advisor + Aff.</div><div class="tb" style="background:var(--mo);">Partner Portal</div><div class="tb" style="background:var(--mo);">Atlas UI</div><div class="tb" style="background:var(--mo);">QA + Polish</div></div>
+    <div class="gr"><div class="grn"><div class="grd" style="background:var(--ca);"></div>Canver</div><div class="tb" style="background:var(--ca);">Schema + Import</div><div class="tb" style="background:var(--ca);">Score algo</div><div class="tb" style="background:var(--ca);">Assessment API</div><div class="tb" style="background:var(--ca);">Path + Peers</div><div class="tb" style="background:var(--ca);">Trigger + Rec.</div><div class="tb" style="background:var(--ca);">Partner backend</div><div class="tb" style="background:var(--ca);">RAG + Atlas</div><div class="tb" style="background:var(--ca);">Deploy</div></div>
+    <div class="gr"><div class="grn"><div class="grd" style="background:var(--de);"></div>Deepu</div><div class="tb" style="background:#ccc;color:#999;font-size:8px;">Planning</div><div class="tb" style="background:var(--de);">Atlas v1</div><div class="tb" style="background:var(--de);">Survey AI</div><div class="tb" style="background:var(--de);">Path AI rank</div><div class="tb" style="background:var(--de);">Trigger AI</div><div class="tb" style="background:var(--de);">Agent prompts</div><div class="tb" style="background:var(--de);">RAG content</div><div class="tb" style="background:var(--de);">Brief AI + QA</div></div>
+    <div class="gr"><div class="grn"><div class="grd" style="background:var(--ke);"></div>Kewin</div><div class="tb" style="background:var(--ke);">Sol. list</div><div class="tb" style="background:var(--ke);">Aff. targets</div><div class="tb" style="background:var(--ke);">Pitch + reach</div><div class="tb" style="background:var(--ke);">Outreach</div><div class="tb" style="background:var(--ke);">Partners close</div><div class="tb" style="background:var(--ke);">Aff. + Global</div><div class="tb" style="background:var(--ke);">Premium sales</div><div class="tb" style="background:var(--ke);">Launch</div></div>
+    <div class="gr"><div class="grn"><div class="grd" style="background:var(--da);"></div>David</div><div class="tb" style="background:var(--da);">Survey review</div><div class="tb" style="background:var(--da);">Score OK</div><div class="tb" style="background:var(--da);">Phase I GO</div><div class="tb" style="background:var(--da);">UAT</div><div class="tb" style="background:var(--da);">Partner OK</div><div class="tb" style="background:var(--da);">Phase III GO</div><div class="tb" style="background:var(--da);">Atlas voice OK</div><div class="tb" style="background:var(--da);">Launch GO</div></div>
+  </div>
+
+  <div class="sec-lbl">Key Milestones</div>
+  <div class="ms">
+    <div class="mc" style="--c:var(--mo);"><div class="mcl">Phase I</div><div class="mc-day">Day 14</div><div class="mce">Schema · Score on existing data · Compass UI ready</div><div class="mco">David sign-off</div></div>
+    <div class="mc" style="--c:var(--ca);"><div class="mcl">Phase II</div><div class="mc-day">Day 28</div><div class="mce">Compass live · Dashboard · Zoho retired · Advisor Console</div><div class="mco">David UAT + sign-off</div></div>
+    <div class="mc" style="--c:var(--go);"><div class="mcl">First Revenue</div><div class="mc-day">Day 35–45</div><div class="mce">3+ Solution Partners · First affiliate · First lead tracked</div><div class="mco">Kewin owns</div></div>
+    <div class="mc" style="--c:var(--da);"><div class="mcl">Full Launch</div><div class="mc-day">Day 55–60</div><div class="mce">Atlas live · Premium · Weekly Brief · Member announcement</div><div class="mco">David GO</div></div>
+  </div>
+
+  <div class="sec-lbl">Phase Breakdown</div>
+
+  <div class="psec open" id="p1">
+    <div class="phd" style="background:var(--g);" onclick="tog('p1')">
+      <div class="phl"><div class="phn">I</div><div><div class="pht">Foundation + Compass</div><div class="phs">Schema · Survey import · Score · Compass UI</div></div></div>
+      <div style="display:flex;gap:12px;align-items:center;"><span class="phday">Day 1–14</span><span class="phch">▾</span></div>
+    </div>
+    <div class="pbody">
+      <div class="tg">
+        <div class="pc"><div class="pch"><div class="pchd" style="background:var(--mo);"></div><div><div class="pchn">Mohammed</div><div class="pchr">Frontend</div></div></div>
+          <div class="tlist">
+            <div class="ti c"><div class="tin">Flutter project setup</div><div class="tid">GoRouter, Riverpod, Supabase client, design tokens. Running Day 1.</div></div>
+            <div class="ti c"><div class="tin">Compass survey UI engine</div><div class="tid">6 reusable question types. Progress bar. Auto-save and resume. Mobile-first. Built on existing question structure.</div></div>
+            <div class="ti"><div class="tin">Dashboard skeleton</div><div class="tid">Score card, stage track (Start/Grow/Profit/Exit), Path, Partners, Advisors. Static data.</div></div>
+            <div class="ti"><div class="tin">Onboarding screen</div><div class="tid">Signup → Compass mandatory before dashboard access.</div></div>
+            <div class="ti"><div class="tin">Next.js setup</div><div class="tid">Advisor Console + Partner Portal repos. Shared tokens.</div></div>
+          </div>
+        </div>
+        <div class="pc"><div class="pch"><div class="pchd" style="background:var(--ca);"></div><div><div class="pchn">Canver</div><div class="pchr">Backend</div></div></div>
+          <div class="tlist">
+            <div class="ti c"><div class="tin">Full schema</div><div class="tid">founders, assessments, scores, archetypes, triggers, solution_partners, global_partners, affiliates, referral_codes. ERD first.</div></div>
+            <div class="ti c"><div class="tin">Import existing survey data</div><div class="tid">Map Zoho survey responses to new schema. Years of responses feed Score training and archetype patterns.</div></div>
+            <div class="ti c"><div class="tin">Stage Score algorithm v1</div><div class="tid">5 dimensions. All 4 stages: Start, Grow, Profit, Exit. Validated on imported data.</div></div>
+            <div class="ti"><div class="tin">Auth setup</div><div class="tid">Supabase auth for founders, advisors, partners, affiliates. Role-based access.</div></div>
+          </div>
+        </div>
+        <div class="pc"><div class="pch"><div class="pchd" style="background:var(--de);"></div><div><div class="pchn">Deepu</div><div class="pchr">AI Engineering</div></div></div>
+          <div class="tlist">
+            <div class="ti"><div class="tin">Atlas prompt v1</div><div class="tid">General co-founder. All 4 stages including Exit. Submit to David by Day 7.</div></div>
+            <div class="ti"><div class="tin">Survey AI enhancement design</div><div class="tid">How AI branches beyond existing questions. Exit intent detection logic.</div></div>
+            <div class="ti"><div class="tin">RAG architecture plan</div><div class="tid">MN lesson chunking. Vector store choice. Retrieval across all stages.</div></div>
+          </div>
+        </div>
+        <div class="pc"><div class="pch"><div class="pchd" style="background:var(--ke);"></div><div><div class="pchn">Kewin + Sales</div><div class="pchr">Partners & Affiliates</div></div></div>
+          <div class="tlist">
+            <div class="ti c"><div class="tin">Solution Partner list (top 10)</div><div class="tid">CFOs, M&A advisors, legal firms, coaches, branding agencies. Ranked by trigger fit. Due Day 5.</div></div>
+            <div class="ti c"><div class="tin">Affiliate target list (top 20)</div><div class="tid">India/APAC accelerators, schools, CA firms, coworking. David's warm intros. Due Day 5.</div></div>
+            <div class="ti"><div class="tin">Global Partner applications</div><div class="tid">Apply to AWS Activate, HubSpot for Startups, Stripe Atlas, Xero partner program.</div></div>
+            <div class="ti"><div class="tin">Commission model draft</div><div class="tid">Sol. Partner rev share %. Affiliate per-activation. Present to David Day 7.</div></div>
+          </div>
+        </div>
+        <div class="pc"><div class="pch"><div class="pchd" style="background:var(--da);"></div><div><div class="pchn">David</div><div class="pchr">Founder</div></div></div>
+          <div class="tlist">
+            <div class="ti c"><div class="tin">Review existing survey data</div><div class="tid">What maps to Score dimensions. What's missing. What to add. Foundation of the whole build.</div></div>
+            <div class="ti c"><div class="tin">Approve Score dimensions</div><div class="tid">5 dimensions and weights. Sign off Day 7. Core IP.</div></div>
+            <div class="ti"><div class="tin">Atlas voice check</div><div class="tid">Review Deepu's prompt v1 by Day 10.</div></div>
+            <div class="ti c"><div class="tin">Phase I GO — Day 14</div><div class="tid">Schema live, Score on existing data, Compass UI ready.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="psec" id="p2">
+    <div class="phd" style="background:var(--ca);" onclick="tog('p2')">
+      <div class="phl"><div class="phn">II</div><div><div class="pht">Founder Experience</div><div class="phs">Compass live · Dashboard · Zoho retired · Affiliate page</div></div></div>
+      <div style="display:flex;gap:12px;align-items:center;"><span class="phday">Day 15–28</span><span class="phch">▾</span></div>
+    </div>
+    <div class="pbody">
+      <div class="tg">
+        <div class="pc"><div class="pch"><div class="pchd" style="background:var(--mo);"></div><div><div class="pchn">Mohammed</div></div></div>
+          <div class="tlist">
+            <div class="ti c"><div class="tin">Compass live (replaces Zoho)</div><div class="tid">Full survey wired to API. All 4 stages. Replaces Zoho Day 21.</div></div>
+            <div class="ti c"><div class="tin">Home dashboard (live data)</div><div class="tid">Score, stage track (4 stages), path, Solution Partners panel, Global Partners panel, advisors, activity. All from Supabase.</div></div>
+            <div class="ti"><div class="tin">Advisor Console</div><div class="tid">Next.js. Qualified founder feed. Score, stage, challenges. Filter and book. David uses Week 4.</div></div>
+            <div class="ti"><div class="tin">Affiliate landing page</div><div class="tid">eprenz.com/affiliates. Signup, commission, referral link. Kewin shares Day 21.</div></div>
+          </div>
+        </div>
+        <div class="pc"><div class="pch"><div class="pchd" style="background:var(--ca);"></div><div><div class="pchn">Canver</div></div></div>
+          <div class="tlist">
+            <div class="ti c"><div class="tin">Assessment API full</div><div class="tid">POST answer with branching, POST complete triggers Score. Versioned.</div></div>
+            <div class="ti"><div class="tin">Score calculation live</div><div class="tid">0–1000, 5 dimensions, stage (Start/Grow/Profit/Exit). Weekly recalc.</div></div>
+            <div class="ti"><div class="tin">Path recommendation API</div><div class="tid">MN lessons and steps by Score/archetype/challenges. Exit stage has own content.</div></div>
+            <div class="ti"><div class="tin">Affiliate referral tracking</div><div class="tid">?ref= param. Affiliate ID on founder record.</div></div>
+          </div>
+        </div>
+        <div class="pc"><div class="pch"><div class="pchd" style="background:var(--de);"></div><div><div class="pchn">Deepu</div></div></div>
+          <div class="tlist">
+            <div class="ti"><div class="tin">Survey AI branching</div><div class="tid">AI reads free-text for signals (fundraising, exit intent, hiring). Branches beyond base questions.</div></div>
+            <div class="ti"><div class="tin">Path personalization AI</div><div class="tid">AI ranks lessons/steps by leverage per founder. Exit stage content ranked.</div></div>
+          </div>
+        </div>
+        <div class="pc"><div class="pch"><div class="pchd" style="background:var(--ke);"></div><div><div class="pchn">Kewin + Sales</div></div></div>
+          <div class="tlist">
+            <div class="ti c"><div class="tin">Solution Partner outreach</div><div class="tid">Top 5. Goal: 3 signed by Day 35.</div></div>
+            <div class="ti c"><div class="tin">First affiliate outreach</div><div class="tid">T-Hub, 91springboard, CA firms. David's intros. Goal: 1 signed by Day 35.</div></div>
+            <div class="ti"><div class="tin">Global Partner follow-up</div><div class="tid">Check Phase I applications. Get 2 approved.</div></div>
+          </div>
+        </div>
+        <div class="pc"><div class="pch"><div class="pchd" style="background:var(--da);"></div><div><div class="pchn">David</div></div></div>
+          <div class="tlist">
+            <div class="ti c"><div class="tin">UAT Compass flow</div><div class="tid">Go through as a founder. All 4 stages. Flag before Zoho retires Day 21.</div></div>
+            <div class="ti c"><div class="tin">Phase II GO — Day 28</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="psec" id="p3">
+    <div class="phd" style="background:linear-gradient(135deg,#B8761F,#D4A040);" onclick="tog('p3')">
+      <div class="phl"><div class="phn">III</div><div><div class="pht">Revenue Engine</div><div class="phs">Solution Partner triggers · Global Partner recommendations · Affiliates live</div></div></div>
+      <div style="display:flex;gap:12px;align-items:center;"><span class="phday">Day 29–42</span><span class="phch">▾</span></div>
+    </div>
+    <div class="pbody">
+      <div class="tg">
+        <div class="pc"><div class="pch"><div class="pchd" style="background:var(--mo);"></div><div><div class="pchn">Mohammed</div></div></div>
+          <div class="tlist">
+            <div class="ti c"><div class="tin">Solution Partner trigger cards</div><div class="tid">Card in dashboard when trigger fires. Trigger reason, partner type, offer, Book Call.</div></div>
+            <div class="ti c"><div class="tin">Global Partners screen</div><div class="tid">Separate tab. Essential tools (Stripe/AWS/Xero/HubSpot) by stack gap. "Get Started" not "Book Call."</div></div>
+            <div class="ti"><div class="tin">Partner portals</div><div class="tid">Solution Partner: sees matched leads. Global Partner: sees referral stats.</div></div>
+            <div class="ti"><div class="tin">Affiliate dashboard</div><div class="tid">Link, signups, commissions earned.</div></div>
+          </div>
+        </div>
+        <div class="pc"><div class="pch"><div class="pchd" style="background:var(--ca);"></div><div><div class="pchn">Canver</div></div></div>
+          <div class="tlist">
+            <div class="ti c"><div class="tin">Trigger engine (Solution Partners)</div><div class="tid">Batch job. Fires for CFO, M&A, legal, coaching, branding signals. Notifies partner via Brevo.</div></div>
+            <div class="ti c"><div class="tin">Recommendation engine (Global Partners)</div><div class="tid">Separate from triggers. Runs on onboarding. Which tools is founder missing? Returns in Path + Partners screen.</div></div>
+            <div class="ti"><div class="tin">Attribution tracking</div><div class="tid">Trigger → surface → click → deal. Rev share for Solution Partners. Referral commission for Affiliates + Global Partners.</div></div>
+          </div>
+        </div>
+        <div class="pc"><div class="pch"><div class="pchd" style="background:var(--de);"></div><div><div class="pchn">Deepu</div></div></div>
+          <div class="tlist">
+            <div class="ti"><div class="tin">AI trigger enhancement</div><div class="tid">AI catches triggers from behavior and free text beyond rule engine.</div></div>
+            <div class="ti"><div class="tin">Atlas dev/staging</div><div class="tid">Atlas live internally. All 4 stages. Exit M&A scenarios tested.</div></div>
+          </div>
+        </div>
+        <div class="pc"><div class="pch"><div class="pchd" style="background:var(--ke);"></div><div><div class="pchn">Kewin + Sales</div></div></div>
+          <div class="tlist">
+            <div class="ti c"><div class="tin">Close 3–5 Solution Partners</div><div class="tid">Setup fee + rev share confirmed. First revenue by Day 42.</div></div>
+            <div class="ti c"><div class="tin">First affiliate live</div><div class="tid">1 with referral link by Day 35. First referred founders in.</div></div>
+            <div class="ti"><div class="tin">2 Global Partners approved</div><div class="tid">AWS Activate + HubSpot for Startups minimum. Add to recommendation engine.</div></div>
+          </div>
+        </div>
+        <div class="pc"><div class="pch"><div class="pchd" style="background:var(--da);"></div><div><div class="pchn">David</div></div></div>
+          <div class="tlist">
+            <div class="ti c"><div class="tin">Approve each Solution Partner</div><div class="tid">Every partner goes live with David's sign-off only.</div></div>
+            <div class="ti c"><div class="tin">Phase III GO — Day 42</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="psec" id="p4">
+    <div class="phd" style="background:var(--de);" onclick="tog('p4')">
+      <div class="phl"><div class="phn">IV</div><div><div class="pht">AI Advisory Layer</div><div class="phs">Atlas live · 5 agents · RAG on Eprenz IP · Premium tier</div></div></div>
+      <div style="display:flex;gap:12px;align-items:center;"><span class="phday">Day 43–49</span><span class="phch">▾</span></div>
+    </div>
+    <div class="pbody">
+      <div class="tg">
+        <div class="pc"><div class="pch"><div class="pchd" style="background:var(--mo);"></div><div><div class="pchn">Mohammed</div></div></div>
+          <div class="tlist">
+            <div class="ti c"><div class="tin">Atlas chat screen</div><div class="tid">Context bar, agent picker, message bubbles. Exit stage shows M&A context.</div></div>
+            <div class="ti"><div class="tin">Premium paywall UI</div><div class="tid">Soft gate on specialist agents. Upgrade prompt.</div></div>
+          </div>
+        </div>
+        <div class="pc"><div class="pch"><div class="pchd" style="background:var(--ca);"></div><div><div class="pchn">Canver</div></div></div>
+          <div class="tlist">
+            <div class="ti c"><div class="tin">Atlas API routing</div><div class="tid">Next.js → Anthropic. Founder profile injected. Streams response. Exit context for Exit founders.</div></div>
+            <div class="ti"><div class="tin">RAG pipeline (pgvector)</div><div class="tid">MN lessons + Exit content chunked and indexed.</div></div>
+          </div>
+        </div>
+        <div class="pc"><div class="pch"><div class="pchd" style="background:var(--de);"></div><div><div class="pchn">Deepu</div></div></div>
+          <div class="tlist">
+            <div class="ti c"><div class="tin">Atlas general finalized</div><div class="tid">David approved. All 4 stages. Exit conversations (M&A, valuation) handled.</div></div>
+            <div class="ti c"><div class="tin">5 specialist prompts</div><div class="tid">CFO, CMO, Sales, People, Legal. Tested on 20+ scenarios each incl. Exit. David approves.</div></div>
+            <div class="ti"><div class="tin">RAG content indexed</div><div class="tid">All MN lessons + frameworks. Retrieval tested.</div></div>
+          </div>
+        </div>
+        <div class="pc"><div class="pch"><div class="pchd" style="background:var(--ke);"></div><div><div class="pchn">Kewin + Sales</div></div></div>
+          <div class="tlist">
+            <div class="ti"><div class="tin">Premium tier first sales</div><div class="tid">20 identified members. David + Kewin personal outreach. Goal: 10 premium by launch.</div></div>
+          </div>
+        </div>
+        <div class="pc"><div class="pch"><div class="pchd" style="background:var(--da);"></div><div><div class="pchn">David</div></div></div>
+          <div class="tlist">
+            <div class="ti c"><div class="tin">Atlas voice approval</div><div class="tid">Test 10+ founder questions incl. Exit. Does it sound like Eprenz?</div></div>
+            <div class="ti c"><div class="tin">Phase IV GO — Day 49</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="psec" id="p5">
+    <div class="phd" style="background:var(--da);" onclick="tog('p5')">
+      <div class="phl"><div class="phn">V</div><div><div class="pht">Launch</div><div class="phs">Weekly Brief · Cohorts · QA · Member announcement</div></div></div>
+      <div style="display:flex;gap:12px;align-items:center;"><span class="phday">Day 50–60</span><span class="phch">▾</span></div>
+    </div>
+    <div class="pbody">
+      <div class="tg">
+        <div class="pc"><div class="pch"><div class="pchd" style="background:var(--mo);"></div><div><div class="pchn">Mohammed</div></div></div>
+          <div class="tlist">
+            <div class="ti"><div class="tin">Weekly Brief in-app</div><div class="tid">Monday: what worked, what slipped, 3 actions. Exit stage gets exit-specific brief.</div></div>
+            <div class="ti c"><div class="tin">QA all screens</div><div class="tid">All devices. All 4 stages. Empty + error states.</div></div>
+          </div>
+        </div>
+        <div class="pc"><div class="pch"><div class="pchd" style="background:var(--ca);"></div><div><div class="pchn">Canver</div></div></div>
+          <div class="tlist">
+            <div class="ti c"><div class="tin">Weekly Brief cron</div><div class="tid">Monday 7am. Atlas generates per founder. Brevo email + push.</div></div>
+            <div class="ti c"><div class="tin">Production deployment</div><div class="tid">Vercel + Flutter prod builds. Monitoring. Load tested.</div></div>
+          </div>
+        </div>
+        <div class="pc"><div class="pch"><div class="pchd" style="background:var(--de);"></div><div><div class="pchn">Deepu</div></div></div>
+          <div class="tlist">
+            <div class="ti"><div class="tin">Brief AI tuning</div><div class="tid">20+ test briefs. All stages. Personal. Under 3s.</div></div>
+          </div>
+        </div>
+        <div class="pc"><div class="pch"><div class="pchd" style="background:var(--ke);"></div><div><div class="pchn">Kewin + Sales</div></div></div>
+          <div class="tlist">
+            <div class="ti c"><div class="tin">Member launch email</div><div class="tid">All 150K+ community. Compass is live. Get your Score. Drive 500 assessments Week 8.</div></div>
+            <div class="ti"><div class="tin">Partner + affiliate launch brief</div><div class="tid">Leads and referrals start flowing this week.</div></div>
+          </div>
+        </div>
+        <div class="pc"><div class="pch"><div class="pchd" style="background:var(--da);"></div><div><div class="pchn">David</div></div></div>
+          <div class="tlist">
+            <div class="ti c"><div class="tin">Final walkthrough — Day 55</div><div class="tid">Signup → Compass → Dashboard → all screens. All 4 stages.</div></div>
+            <div class="ti c"><div class="tin">GO / NO-GO — Day 56–58</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-lbl" style="margin-top:8px;">Team Rules</div>
+  <div class="rules">
+    <h3>How we run this</h3>
+    <div class="rg">
+      <div class="rule"><div class="rt">Compass first. Everything else parallel.</div><div class="rd">Phases I and II are almost entirely Compass. Partners and AI run alongside but cannot block it.</div></div>
+      <div class="rule"><div class="rt">Existing survey data is the starting point</div><div class="rd">Don't build from scratch. Import Zoho responses into new schema. Use years of data to validate the Score algorithm from Day 1.</div></div>
+      <div class="rule"><div class="rt">Solution Partners trigger. Global Partners recommend.</div><div class="rd">Two different engines. Don't mix. Triggers fire on pain signals. Recommendations run on stack gap detection at onboarding.</div></div>
+      <div class="rule"><div class="rt">Kewin sells from Day 3</div><div class="rd">Solution Partner outreach starts Week 1 using the prototype. Agreements signed before the portal exists.</div></div>
+      <div class="rule"><div class="rt">API contracts before UI build</div><div class="rd">Canver publishes endpoint schemas before Mohammed builds against them.</div></div>
+      <div class="rule"><div class="rt">David has 5 sign-offs only</div><div class="rd">Day 14, 28, 42, 49, 56. No tactical questions to David mid-phase.</div></div>
+    </div>
+  </div>
+
+</div>
+<footer>Eprenz OS · Sprint Plan · Mohammed Owais · June 2026 · Confidential</footer>
+<script>
+function tog(id){document.getElementById(id).classList.toggle('open');}
+document.getElementById('p1').classList.add('open');
+</script>
+</body>
+</html>

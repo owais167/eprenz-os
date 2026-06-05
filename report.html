@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Eprenz OS — Complete Product Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#1A3329;--green-deep:#0D2018;--green-soft:#2D5240;
+  --bg:#F7F5F0;--bg-dim:#EDE9E0;--surface:#fff;
+  --gold:#C4943A;--gold-soft:rgba(196,148,58,0.15);
+  --border:#E8E4DA;--border-soft:#F0EDE6;
+  --text:#0D1B14;--text-soft:#6B7B72;--text-faint:#9AA89E;
+  --success:#2D7A4E;--ai:#6B4FA0;
+  --r:12px;--r-sm:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.6;}
+
+/* ── TOP NAV ── */
+.topnav{position:fixed;top:0;left:0;right:0;z-index:999;background:rgba(26,51,41,0.97);backdrop-filter:blur(12px);padding:0 48px;display:flex;align-items:center;gap:0;height:56px;border-bottom:1px solid rgba(255,255,255,0.08);}
+.nav-logo{font-size:17px;font-weight:700;color:#fff;letter-spacing:-0.01em;margin-right:40px;flex-shrink:0;display:flex;align-items:center;gap:8px;}
+.nav-logo span{color:rgba(255,255,255,0.4);}
+.nav-links{display:flex;gap:2px;flex:1;}
+.nav-link{padding:6px 14px;border-radius:6px;font-size:13px;font-weight:500;color:rgba(255,255,255,0.6);cursor:pointer;transition:all 0.15s;white-space:nowrap;}
+.nav-link:hover{color:#fff;background:rgba(255,255,255,0.07);}
+.nav-link.active{color:#fff;background:rgba(255,255,255,0.12);}
+.nav-right{display:flex;gap:10px;margin-left:auto;}
+.nav-btn{padding:7px 16px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;border:none;background:var(--gold);color:#fff;transition:background 0.15s;}
+.nav-btn:hover{background:#A8821E;}
+
+/* ── SECTIONS ── */
+.section{padding:100px 48px;max-width:1280px;margin:0 auto;}
+.section-dark{background:var(--green);color:#fff;padding:100px 48px;}
+.section-dark .container{max-width:1280px;margin:0 auto;}
+.section-dim{background:var(--bg-dim);padding:100px 48px;}
+.section-dim .container{max-width:1280px;margin:0 auto;}
+
+/* ── HERO ── */
+.hero{min-height:100vh;background:var(--green);display:flex;flex-direction:column;justify-content:flex-end;padding:80px 48px 80px;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(circle at 70% 30%,rgba(196,148,58,0.12) 0%,transparent 60%),radial-gradient(circle at 20% 80%,rgba(255,255,255,0.04) 0%,transparent 50%);pointer-events:none;}
+.hero-compass{position:absolute;right:-100px;top:50%;transform:translateY(-50%);width:600px;height:600px;opacity:0.04;background:radial-gradient(circle,rgba(255,255,255,0.8) 0%,transparent 70%);border-radius:50%;border:1px solid rgba(255,255,255,0.3);}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(196,148,58,0.2);color:var(--gold);padding:6px 14px;border-radius:100px;font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:24px;width:fit-content;}
+.hero h1{font-size:clamp(52px,8vw,110px);font-weight:800;color:#fff;line-height:0.95;letter-spacing:-0.03em;margin-bottom:24px;}
+.hero h1 em{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--gold);}
+.hero-sub{font-size:clamp(16px,2vw,20px);color:rgba(255,255,255,0.6);max-width:640px;line-height:1.55;margin-bottom:56px;}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid rgba(255,255,255,0.1);border-left:1px solid rgba(255,255,255,0.1);}
+.hero-stat{padding:24px 28px;border-right:1px solid rgba(255,255,255,0.1);border-bottom:1px solid rgba(255,255,255,0.1);}
+.hs-val{font-size:38px;font-weight:800;color:#fff;letter-spacing:-0.02em;line-height:1;}
+.hs-label{font-size:12px;color:rgba(255,255,255,0.5);margin-top:4px;font-weight:500;letter-spacing:0.05em;}
+.scroll-hint{position:absolute;bottom:40px;right:48px;font-size:12px;color:rgba(255,255,255,0.4);font-weight:500;letter-spacing:0.1em;text-transform:uppercase;display:flex;align-items:center;gap:8px;}
+
+/* ── SECTION HEADS ── */
+.sec-tag{font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+.sec-tag.white{color:rgba(196,148,58,0.8);}
+.sec-num{font-size:72px;font-weight:800;color:rgba(26,51,41,0.06);line-height:1;margin-bottom:-24px;letter-spacing:-0.04em;}
+.sec-num.white{color:rgba(255,255,255,0.06);}
+h2.big{font-size:clamp(36px,4.5vw,54px);font-weight:800;letter-spacing:-0.02em;line-height:1.05;color:var(--text);}
+h2.big em{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--gold);}
+h2.big.white{color:#fff;}
+h2.big.white em{color:var(--gold);}
+.sec-lede{font-size:18px;color:var(--text-soft);line-height:1.6;max-width:720px;margin-top:16px;}
+.sec-lede.white{color:rgba(255,255,255,0.65);}
+
+/* ── CARDS ── */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:24px;}
+.card-dark{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:var(--r);padding:24px;}
+.card-gold{background:rgba(196,148,58,0.08);border:1px solid rgba(196,148,58,0.25);border-radius:var(--r);padding:24px;}
+.card-label{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-faint);margin-bottom:4px;}
+.card-label.gold{color:var(--gold);}
+.card-label.white{color:rgba(255,255,255,0.5);}
+h4.card-title{font-size:18px;font-weight:700;color:var(--text);line-height:1.3;margin-bottom:8px;}
+h4.card-title.white{color:#fff;}
+
+/* ── GRIDS ── */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.mt8{margin-top:8px;}.mt12{margin-top:12px;}.mt16{margin-top:16px;}
+.mt24{margin-top:24px;}.mt32{margin-top:32px;}.mt48{margin-top:48px;}.mt64{margin-top:64px;}
+.mb8{margin-bottom:8px;}.mb16{margin-bottom:16px;}.mb24{margin-bottom:24px;}
+
+/* ── SCORE DISPLAY ── */
+.score-big{font-size:80px;font-weight:800;color:#fff;line-height:1;letter-spacing:-0.03em;}
+.score-big sub{font-size:24px;font-weight:400;color:rgba(255,255,255,0.4);}
+.stage-track{display:flex;align-items:center;gap:0;margin-top:16px;}
+.st-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.2);flex-shrink:0;}
+.st-dot.done{background:#fff;}
+.st-dot.now{background:var(--gold);box-shadow:0 0 0 3px rgba(196,148,58,0.3);}
+.st-line{flex:1;height:2px;background:rgba(255,255,255,0.15);}
+.st-line.done{background:rgba(255,255,255,0.5);}
+.stage-labels{display:flex;justify-content:space-between;margin-top:8px;}
+.sl{font-size:11px;font-weight:500;color:rgba(255,255,255,0.4);}
+.sl.now{color:#fff;font-weight:700;}
+
+/* ── PRODUCT TABS ── */
+.tab-bar{display:flex;gap:4px;background:var(--bg-dim);padding:4px;border-radius:10px;margin-bottom:32px;overflow-x:auto;}
+.tab{padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;color:var(--text-soft);transition:all 0.15s;white-space:nowrap;flex-shrink:0;}
+.tab.active{background:#fff;color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,0.08);}
+.tab-panel{display:none;}
+.tab-panel.active{display:grid;grid-template-columns:1fr 1.2fr;gap:32px;align-items:start;}
+
+/* ── SCREEN PREVIEW ── */
+.screen-wrap{background:var(--bg-dim);border:1px solid var(--border);border-radius:10px;padding:16px;position:relative;}
+.browser-bar{background:#E8E4DA;border-radius:6px 6px 0 0;padding:10px 14px;display:flex;align-items:center;gap:8px;margin:-16px -16px 0;border-bottom:1px solid var(--border);}
+.b-dot{width:10px;height:10px;border-radius:50%;background:var(--border);}
+.b-url{flex:1;background:var(--surface);border-radius:4px;padding:4px 10px;font-size:11px;color:var(--text-faint);font-family:monospace;margin:0 10px;}
+.screen-inner{background:var(--surface);border-radius:0 0 6px 6px;overflow:hidden;margin:-0px -16px -16px;min-height:400px;}
+
+/* MINI SCREEN COMPONENTS */
+.mini-sidebar{width:140px;background:var(--green);padding:14px 10px;flex-shrink:0;}
+.mini-sb-logo{font-size:13px;font-weight:700;color:#fff;padding:0 6px 12px;border-bottom:1px solid rgba(255,255,255,0.1);margin-bottom:10px;}
+.mini-nav{font-size:11px;color:rgba(255,255,255,0.5);padding:4px 8px;border-radius:5px;margin-bottom:2px;cursor:default;}
+.mini-nav.active{background:rgba(255,255,255,0.12);color:#fff;}
+.mini-main{flex:1;padding:16px;background:var(--bg);overflow:hidden;}
+.mini-header{font-size:14px;font-weight:700;color:var(--text);margin-bottom:12px;}
+.mini-score-card{background:var(--green);border-radius:8px;padding:12px;margin-bottom:10px;}
+.mini-score-num{font-size:28px;font-weight:800;color:#fff;line-height:1;}
+.mini-score-num sub{font-size:11px;font-weight:400;color:rgba(255,255,255,0.4);}
+.mini-score-lbl{font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:4px;}
+.mini-card{background:#fff;border:1px solid var(--border);border-radius:7px;padding:10px;margin-bottom:8px;}
+.mini-card-lbl{font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-faint);margin-bottom:6px;}
+.mini-row{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--border-soft);}
+.mini-row:last-child{border-bottom:none;}
+.mini-avatar{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff;flex-shrink:0;}
+.mini-btn{background:var(--green);color:#fff;padding:3px 8px;border-radius:4px;font-size:9px;font-weight:600;margin-left:auto;}
+.mini-badge{background:rgba(196,148,58,0.15);color:var(--gold);padding:2px 6px;border-radius:100px;font-size:8px;font-weight:600;}
+.mini-progress{height:3px;background:var(--bg-dim);border-radius:2px;overflow:hidden;margin-top:4px;}
+.mini-prog-fill{height:100%;background:var(--green);border-radius:2px;}
+.mini-step{padding:6px;border:1px solid var(--border);border-radius:5px;margin-bottom:6px;}
+.mini-step.active-step{border-color:var(--green);border-left-width:2px;}
+.mini-step-name{font-size:10px;font-weight:600;color:var(--text);margin-bottom:3px;}
+.mini-chat{background:var(--green);color:#fff;border-radius:6px 6px 0 0;padding:10px 12px;margin-bottom:0;}
+.mini-chat-lbl{font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:4px;}
+.mini-chat-name{font-size:13px;font-weight:700;color:#fff;}
+.mini-msg-bot{background:var(--bg);border-left:2px solid var(--gold);padding:8px 10px;border-radius:0 6px 6px 0;margin:8px 0;font-size:10px;color:var(--text);line-height:1.5;}
+.mini-msg-user{background:var(--green);color:#fff;padding:7px 10px;border-radius:6px;margin:6px 0 6px auto;font-size:10px;max-width:80%;}
+.mini-input{border:1px solid var(--border);border-radius:20px;padding:6px 12px;font-size:10px;color:var(--text-faint);display:flex;justify-content:space-between;margin-top:8px;}
+.mini-send{background:var(--green);width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:8px;}
+
+/* ── AI GRID ── */
+.ai-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-left:1px solid rgba(255,255,255,0.1);border-top:1px solid rgba(255,255,255,0.1);}
+.ai-card{padding:28px 24px;border-right:1px solid rgba(255,255,255,0.1);border-bottom:1px solid rgba(255,255,255,0.1);transition:background 0.2s;}
+.ai-card:hover{background:rgba(255,255,255,0.04);}
+.ai-icon{width:40px;height:40px;border-radius:10px;background:rgba(196,148,58,0.2);border:1px solid rgba(196,148,58,0.3);display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:14px;}
+.ai-num{font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:rgba(196,148,58,0.8);margin-bottom:8px;}
+.ai-card h4{font-size:17px;font-weight:700;color:#fff;margin-bottom:8px;line-height:1.3;}
+.ai-card p{font-size:13px;color:rgba(255,255,255,0.6);line-height:1.6;}
+.ai-example{margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.08);font-size:12px;color:rgba(196,148,58,0.7);font-style:italic;line-height:1.5;}
+
+/* ── ARCHITECTURE ── */
+.arch-stack{display:flex;flex-direction:column;gap:4px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:var(--r);padding:24px;}
+.arch-layer{border-radius:8px;padding:18px 22px;position:relative;}
+.arch-layer.l-users{background:rgba(255,255,255,0.12);}
+.arch-layer.l-ui{background:rgba(255,255,255,0.07);}
+.arch-layer.l-ai{background:linear-gradient(135deg,rgba(107,79,160,0.4) 0%,rgba(74,53,120,0.4) 100%);border:1px solid rgba(107,79,160,0.4);}
+.arch-layer.l-mod{background:rgba(255,255,255,0.04);}
+.arch-layer.l-data{background:rgba(255,255,255,0.04);}
+.arch-layer.l-infra{background:rgba(255,255,255,0.04);}
+.arch-lbl{font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:10px;display:flex;justify-content:space-between;}
+.arch-lbl.ai-lbl{color:rgba(196,196,255,0.8);}
+.arch-chips{display:flex;flex-wrap:wrap;gap:6px;}
+.chip{padding:5px 12px;border-radius:100px;font-size:12px;font-weight:500;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.12);}
+.chip.green{background:rgba(26,51,41,0.8);color:rgba(255,255,255,0.9);border-color:rgba(255,255,255,0.2);}
+.chip.gold{background:rgba(196,148,58,0.2);color:var(--gold);border-color:rgba(196,148,58,0.3);}
+.chip.ai{background:rgba(107,79,160,0.3);color:rgba(196,196,255,0.9);border-color:rgba(107,79,160,0.4);}
+
+/* Module rows within arch */
+.mod-row{display:grid;grid-template-columns:80px 1fr;gap:12px;padding:10px 0;border-bottom:1px dashed rgba(255,255,255,0.08);}
+.mod-row:last-child{border-bottom:none;padding-bottom:0;}
+.mod-row:first-child{padding-top:0;}
+.mod-yr{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.35);padding-top:4px;}
+.mod-yr.y1{color:rgba(255,255,255,0.6);}
+.mod-yr.y2{color:rgba(107,79,160,0.8);}
+.mod-yr.y3{color:var(--gold);}
+
+/* ── BUSINESS MODEL ── */
+.bm-grid{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:16px;margin-bottom:16px;}
+.bm-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px;}
+.bm-card.primary{background:var(--green);border-color:var(--green);}
+.bm-card.primary .bm-title,.bm-card.primary .card-label{color:#fff;}
+.bm-card.primary .card-label{color:rgba(255,255,255,0.5);}
+.bm-title{font-size:18px;font-weight:700;color:var(--text);margin-bottom:14px;}
+.bm-item{padding:10px 0;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:baseline;gap:12px;}
+.bm-item:first-of-type{border-top:none;padding-top:0;}
+.bm-item-name{font-size:13.5px;color:var(--text);font-weight:500;}
+.bm-item-tag{font-size:11px;font-weight:600;color:var(--text-faint);font-family:monospace;}
+.bm-item-desc{font-size:12px;color:var(--text-soft);line-height:1.45;grid-column:1/-1;margin-top:2px;}
+.bm-card.primary .bm-item{border-color:rgba(255,255,255,0.1);}
+.bm-card.primary .bm-item-name{color:rgba(255,255,255,0.9);}
+.bm-card.primary .bm-item-tag{color:rgba(255,255,255,0.4);}
+.bm-card.primary .bm-item-desc{color:rgba(255,255,255,0.6);}
+
+/* Revenue timeline */
+.rev-timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px;}
+.rev-card{border-radius:var(--r);padding:24px;position:relative;overflow:hidden;cursor:pointer;transition:transform 0.2s;}
+.rev-card:hover{transform:translateY(-2px);}
+.rev-card.r1{background:var(--green);color:#fff;}
+.rev-card.r2{background:var(--bg-dim);border:1px solid var(--border);}
+.rev-card.r3{background:rgba(196,148,58,0.08);border:1px solid rgba(196,148,58,0.3);}
+.rev-horizon{font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:12px;}
+.rev-card.r1 .rev-horizon{color:rgba(255,255,255,0.5);}
+.rev-card.r2 .rev-horizon{color:var(--text-faint);}
+.rev-card.r3 .rev-horizon{color:var(--gold);}
+.rev-streams{list-style:none;}
+.rev-stream{padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.1);font-size:13px;display:flex;justify-content:space-between;}
+.rev-card.r2 .rev-stream{border-color:var(--border);}
+.rev-card.r3 .rev-stream{border-color:rgba(196,148,58,0.15);}
+.rev-stream:last-child{border-bottom:none;}
+.rev-card.r1 .rev-stream{color:rgba(255,255,255,0.9);}
+.rev-stream-when{font-size:11px;opacity:0.6;font-family:monospace;}
+
+/* ── ROADMAP ── */
+.roadmap{display:flex;flex-direction:column;gap:4px;}
+.phase-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:border-color 0.2s;}
+.phase-card:hover{border-color:var(--green);}
+.phase-card.open{border-color:var(--green);}
+.phase-head{display:grid;grid-template-columns:60px 100px 1fr 24px;align-items:center;gap:24px;padding:20px 24px;}
+.phase-num{font-size:36px;font-weight:800;color:rgba(26,51,41,0.1);line-height:1;font-family:'Instrument Serif',serif;font-style:italic;}
+.phase-head.open .phase-num{color:var(--green);}
+.phase-time{font-family:monospace;font-size:12px;font-weight:600;color:var(--text-faint);letter-spacing:0.05em;}
+.phase-title{font-size:16px;font-weight:700;color:var(--text);}
+.phase-sub{font-size:13px;color:var(--text-soft);margin-top:2px;}
+.phase-chevron{color:var(--text-faint);font-size:16px;transition:transform 0.2s;}
+.phase-card.open .phase-chevron{transform:rotate(180deg);color:var(--green);}
+.phase-body{display:none;padding:0 24px 24px;grid-template-columns:1fr 1fr;gap:24px;}
+.phase-card.open .phase-body{display:grid;}
+.phase-desc{font-size:14px;color:var(--text-soft);line-height:1.65;margin-bottom:16px;}
+.deliverable{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border-soft);}
+.deliverable:last-child{border-bottom:none;}
+.del-dot{width:6px;height:6px;border-radius:50%;background:var(--green);margin-top:6px;flex-shrink:0;}
+.del-body{}
+.del-name{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px;}
+.del-desc{font-size:12px;color:var(--text-soft);line-height:1.5;}
+.exit-card{background:var(--bg-dim);border-radius:8px;padding:16px;}
+.exit-label{font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-faint);margin-bottom:10px;}
+.exit-item{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--text);padding:6px 0;border-bottom:1px solid var(--border);}
+.exit-item:last-child{border-bottom:none;}
+.exit-check{color:var(--success);font-size:14px;flex-shrink:0;}
+
+/* ── FUTURE VISION ── */
+.year-tabs{display:flex;gap:8px;margin-bottom:32px;}
+.yr-tab{padding:10px 22px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.2s;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.5);}
+.yr-tab.active{background:var(--gold);border-color:var(--gold);color:#fff;}
+.yr-panel{display:none;}
+.yr-panel.active{display:grid;grid-template-columns:1fr 1.2fr;gap:40px;align-items:start;}
+.yr-features{list-style:none;}
+.yr-feature{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.08);}
+.yr-feature:last-child{border-bottom:none;}
+.yf-icon{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;margin-top:2px;}
+.yf-body{}
+.yf-name{font-size:15px;font-weight:700;color:#fff;margin-bottom:4px;}
+.yf-desc{font-size:13px;color:rgba(255,255,255,0.6);line-height:1.55;}
+.yr-vision{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:var(--r);padding:28px;}
+.yr-vision-lbl{font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+.yr-vision-text{font-size:20px;font-weight:700;color:#fff;line-height:1.4;margin-bottom:16px;font-family:'Instrument Serif',serif;font-style:italic;}
+.yr-metric{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;}
+.ym{background:rgba(255,255,255,0.05);border-radius:8px;padding:14px;}
+.ym-val{font-size:26px;font-weight:800;color:#fff;letter-spacing:-0.01em;}
+.ym-lbl{font-size:11px;color:rgba(255,255,255,0.5);margin-top:3px;font-weight:500;}
+
+/* ── COMPOUND ── */
+.compound-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.compound-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:28px;position:relative;overflow:hidden;}
+.compound-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.compound-card:nth-child(1)::before{background:var(--green);}
+.compound-card:nth-child(2)::before{background:var(--ai);}
+.compound-card:nth-child(3)::before{background:var(--gold);}
+.compound-num{font-size:52px;font-weight:800;line-height:1;margin-bottom:12px;letter-spacing:-0.02em;}
+.compound-card:nth-child(1) .compound-num{color:rgba(26,51,41,0.15);}
+.compound-card:nth-child(2) .compound-num{color:rgba(107,79,160,0.15);}
+.compound-card:nth-child(3) .compound-num{color:rgba(196,148,58,0.2);}
+.compound-card h4{font-size:18px;font-weight:700;color:var(--text);margin-bottom:10px;}
+.compound-card p{font-size:14px;color:var(--text-soft);line-height:1.6;}
+
+/* ── CALLOUT BOX ── */
+.callout{background:var(--green);border-radius:var(--r);padding:40px 48px;margin:48px 0;position:relative;overflow:hidden;}
+.callout::before{content:'';position:absolute;top:-60px;right:-60px;width:240px;height:240px;border-radius:50%;background:rgba(196,148,58,0.08);}
+.callout p{font-size:clamp(18px,2.5vw,26px);font-weight:700;color:#fff;line-height:1.4;position:relative;max-width:800px;}
+.callout p em{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--gold);}
+
+/* ── STATS ROW ── */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;}
+.stat-cell{padding:28px 24px;border-right:1px solid var(--border);}
+.stat-cell:last-child{border-right:none;}
+.stat-val{font-size:42px;font-weight:800;color:var(--green);letter-spacing:-0.02em;line-height:1;}
+.stat-lbl{font-size:12px;font-weight:500;color:var(--text-faint);margin-top:4px;letter-spacing:0.05em;}
+
+/* ── INLINE DIAGRAM ── */
+.diagram{background:var(--bg-dim);border:1px solid var(--border);border-radius:var(--r);padding:32px;position:relative;}
+.diag-label{position:absolute;top:16px;left:16px;font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-faint);}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-top:8px;}
+.flow-node{padding:18px 12px;text-align:center;border-right:1px solid var(--border);background:var(--surface);}
+.flow-node:last-child{border-right:none;}
+.flow-node.active{background:var(--green);}
+.fn-step{font-size:9px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-faint);margin-bottom:8px;}
+.flow-node.active .fn-step{color:rgba(255,255,255,0.5);}
+.fn-name{font-size:14px;font-weight:700;color:var(--text);line-height:1.2;}
+.flow-node.active .fn-name{color:#fff;}
+.fn-desc{font-size:11px;color:var(--text-soft);margin-top:4px;line-height:1.4;}
+.flow-node.active .fn-desc{color:rgba(255,255,255,0.6);}
+
+/* ── MOAT ITEMS ── */
+.moat-list{list-style:none;}
+.moat-item{display:flex;gap:16px;padding:20px 0;border-bottom:1px solid rgba(255,255,255,0.08);}
+.moat-item:last-child{border-bottom:none;}
+.moat-icon{width:40px;height:40px;border-radius:10px;background:var(--gold-soft);border:1px solid rgba(196,148,58,0.3);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.moat-body{}
+.moat-name{font-size:16px;font-weight:700;color:#fff;margin-bottom:4px;}
+.moat-desc{font-size:13.5px;color:rgba(255,255,255,0.6);line-height:1.55;}
+
+/* ── FOOTER ── */
+footer{background:var(--green-deep);padding:80px 48px 60px;text-align:center;}
+.footer-logo{font-size:22px;font-weight:800;color:#fff;margin-bottom:8px;}
+.footer-logo span{color:var(--gold);}
+.footer-tag{font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:40px;}
+.footer-links{display:flex;gap:32px;justify-content:center;flex-wrap:wrap;margin-bottom:40px;}
+.footer-link{font-size:13px;color:rgba(255,255,255,0.5);cursor:pointer;font-weight:500;}
+.footer-link:hover{color:#fff;}
+.footer-copy{font-size:12px;color:rgba(255,255,255,0.25);}
+
+/* ── MISC ── */
+p.body{font-size:15px;color:var(--text-soft);line-height:1.7;}
+p.body-white{font-size:15px;color:rgba(255,255,255,0.65);line-height:1.7;}
+strong.hi{color:var(--text);}
+.divider{height:1px;background:var(--border);margin:32px 0;}
+.divider.white{background:rgba(255,255,255,0.1);}
+.tag-pill{display:inline-block;padding:4px 10px;border-radius:100px;font-size:11px;font-weight:600;}
+.tag-pill.green{background:rgba(45,122,78,0.12);color:var(--success);}
+.tag-pill.gold{background:var(--gold-soft);color:var(--gold);}
+.tag-pill.ai{background:rgba(107,79,160,0.12);color:var(--ai);}
+
+/* scrollbar */
+::-webkit-scrollbar{width:6px;height:6px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+
+@media(max-width:900px){
+  .topnav{padding:0 24px;}.topnav .nav-links .nav-link:nth-child(n+5){display:none;}
+  .section,.section-dark,.section-dim{padding:64px 24px;}
+  .hero{padding:80px 24px 60px;}.hero-stats{grid-template-columns:1fr 1fr;}
+  .grid2,.grid3,.grid4,.bm-grid,.tab-panel.active,.yr-panel.active,.phase-body,.compound-grid,.rev-timeline{grid-template-columns:1fr;}
+  .ai-grid{grid-template-columns:1fr;}
+  .flow{grid-template-columns:1fr 1fr;}
+  .stats-row{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="topnav">
+  <div class="nav-logo">E <span style="color:#fff;font-weight:700;">Eprenz</span><span>.</span></div>
+  <div class="nav-links">
+    <div class="nav-link active" onclick="scrollTo('overview')">Overview</div>
+    <div class="nav-link" onclick="scrollTo('product')">Product</div>
+    <div class="nav-link" onclick="scrollTo('ai')">Atlas AI</div>
+    <div class="nav-link" onclick="scrollTo('architecture')">Architecture</div>
+    <div class="nav-link" onclick="scrollTo('business')">Business Model</div>
+    <div class="nav-link" onclick="scrollTo('roadmap')">Roadmap</div>
+    <div class="nav-link" onclick="scrollTo('future')">Future Vision</div>
+    <div class="nav-link" onclick="scrollTo('why')">Why It Wins</div>
+  </div>
+  <div class="nav-right">
+    <button class="nav-btn" onclick="window.open('eprenz_prototype.html','_blank')">Open Prototype →</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding-top:56px;" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-compass"></div>
+  <div class="hero-tag">◎ Product Report · 2026</div>
+  <h1>Eprenz <em>OS.</em></h1>
+  <p class="hero-sub">The complete product report. Every screen explained. The business model, the AI layer, the architecture, and what the next five years look like for the world's first operating system for entrepreneurial life.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="hs-val counter" data-target="6">0</div><div class="hs-label">Product Screens</div></div>
+    <div class="hero-stat"><div class="hs-val counter" data-target="9">0</div><div class="hs-label">AI Integrations</div></div>
+    <div class="hero-stat"><div class="hs-val counter" data-target="6">0</div><div class="hs-label">Revenue Streams</div></div>
+    <div class="hero-stat"><div class="hs-val" style="font-size:28px;line-height:1.2;">15+<br><span style="font-size:14px;font-weight:400;opacity:0.6;">modules planned</span></div><div class="hs-label">across 3 horizons</div></div>
+  </div>
+  <div class="scroll-hint">↓ Scroll to explore</div>
+</section>
+
+<!-- ════════════════════════════════════ -->
+<!-- SECTION: OVERVIEW -->
+<!-- ════════════════════════════════════ -->
+<div id="overview"></div>
+<div class="section">
+  <div class="sec-num">01</div>
+  <div class="sec-tag">The Big Picture</div>
+  <h2 class="big">What is <em>Eprenz OS?</em></h2>
+  <p class="sec-lede">Eprenz is not a course platform or a community tool. It is the operating layer for entrepreneurial life. One system that replaces twenty disconnected tools, personalizes to every founder's stage and needs, and gets smarter the more it's used.</p>
+
+  <div class="mt48">
+    <div class="grid2">
+      <div>
+        <h3 style="font-size:22px;font-weight:700;color:var(--text);margin-bottom:16px;">The problem it solves</h3>
+        <p class="body">Most founder platforms pick one thing: community, or content, or advisors. None of them know who the founder is, where they are in their journey, what they need right now, or which partner or advisor is the right match. Founders stitch together 10 tools and still get generic advice.</p>
+        <p class="body mt16">Eprenz OS changes this with a single, personalized, AI-powered operating layer. It replaces the survey with an in-app assessment. It replaces the static dashboard with a live Stage Score. It replaces the partner directory with a trigger engine. It replaces discovery calls with qualified advisor conversations.</p>
+      </div>
+      <div>
+        <div class="card" style="background:var(--green);border-color:var(--green);margin-bottom:16px;">
+          <div class="card-label white">Eprenz Score · Alex Morgan</div>
+          <div class="score-big" style="margin-top:8px;">612<sub>/1000</sub></div>
+          <div style="margin-top:8px;font-size:13px;color:rgba(255,255,255,0.55);">Top 24% of all founders · Grow Stage</div>
+          <div class="stage-track mt16">
+            <div class="st-dot done"></div><div class="st-line done"></div>
+            <div class="st-dot now"></div><div class="st-line"></div>
+            <div class="st-dot"></div><div class="st-line"></div>
+            <div class="st-dot"></div>
+          </div>
+          <div class="stage-labels">
+            <span class="sl">Start</span><span class="sl now">Grow</span>
+            <span class="sl">Profit</span><span class="sl">Exit</span>
+          </div>
+        </div>
+        <div class="card" style="border-left:3px solid var(--gold);">
+          <div class="card-label gold">The OS Difference</div>
+          <p class="body mt8">Every interaction is personalized to the founder's exact Score, stage, archetype, and challenges. No two dashboards look the same.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout mt48">
+    <p>Eprenz already has community, brand, content, and partners. The OS layer is the fifth piece that <em>ties everything together</em> and makes it compound.</p>
+  </div>
+
+  <div class="stats-row mt48">
+    <div class="stat-cell"><div class="stat-val counter" data-target="150" data-suffix="K+">0</div><div class="stat-lbl">Community Members</div></div>
+    <div class="stat-cell"><div class="stat-val">4/5</div><div class="stat-lbl">Ecosystem Layers Built</div></div>
+    <div class="stat-cell"><div class="stat-val">12 mo</div><div class="stat-lbl">To Compass Wedge Launch</div></div>
+    <div class="stat-cell"><div class="stat-val">M6</div><div class="stat-lbl">First Partner Revenue</div></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════ -->
+<!-- SECTION: PRODUCT SCREENS -->
+<!-- ════════════════════════════════════ -->
+<div id="product"></div>
+<div class="section-dim">
+  <div class="container">
+    <div class="sec-num">02</div>
+    <div class="sec-tag">The Product</div>
+    <h2 class="big">Six screens. <em>One OS.</em></h2>
+    <p class="sec-lede">The prototype has six fully functional screens. Each one is a Compass module. Together they form the wedge product that opens the door to the ten-year vision.</p>
+
+    <div class="tab-bar mt48">
+      <div class="tab active" onclick="openTab('home')">🏠 Home</div>
+      <div class="tab" onclick="openTab('compass')">◎ Compass</div>
+      <div class="tab" onclick="openTab('path')">↗ Path</div>
+      <div class="tab" onclick="openTab('partners')">⬡ Partners</div>
+      <div class="tab" onclick="openTab('advisors')">◈ Advisors</div>
+      <div class="tab" onclick="openTab('atlas')">✦ Atlas AI</div>
+    </div>
+
+    <!-- HOME TAB -->
+    <div class="tab-panel active" id="tab-home">
+      <div>
+        <div class="screen-wrap">
+          <div class="browser-bar"><div class="b-dot"></div><div class="b-dot"></div><div class="b-dot"></div><div class="b-url">app.eprenz.com/home</div></div>
+          <div class="screen-inner" style="display:flex;min-height:420px;">
+            <div class="mini-sidebar">
+              <div class="mini-sb-logo">Eprenz.</div>
+              <div class="mini-nav active">⌂ Home</div>
+              <div class="mini-nav">◎ Compass</div>
+              <div class="mini-nav">↗ Path</div>
+              <div class="mini-nav">⬡ Partners</div>
+              <div class="mini-nav">◈ Advisors</div>
+              <div class="mini-nav">✦ Atlas AI</div>
+            </div>
+            <div class="mini-main">
+              <div class="mini-header">Welcome back, Alex 👋</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px;">
+                <div class="mini-score-card">
+                  <div class="mini-score-lbl">Eprenz Score</div>
+                  <div class="mini-score-num">612<sub>/1000</sub></div>
+                  <div style="font-size:9px;color:rgba(196,148,58,0.9);margin-top:6px;font-weight:600;">↑ 24 pts this month</div>
+                </div>
+                <div class="mini-card">
+                  <div class="mini-score-lbl" style="color:var(--text-faint);">Growth Stage</div>
+                  <div style="font-size:18px;font-weight:800;color:var(--text);line-height:1.2;margin-bottom:4px;">Grow</div>
+                  <div style="font-size:9px;color:var(--text-faint);">Building momentum</div>
+                </div>
+                <div class="mini-card">
+                  <div class="mini-score-lbl" style="color:var(--text-faint);">Next Action</div>
+                  <div style="font-size:11px;font-weight:600;color:var(--text);line-height:1.3;margin-bottom:6px;">Improve financial clarity</div>
+                  <div class="mini-btn" style="display:inline-block;font-size:8px;">Take Action</div>
+                </div>
+              </div>
+              <div class="mini-card">
+                <div class="mini-card-lbl">Your Personalized Path</div>
+                <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;">
+                  <div style="border:1.5px solid var(--green);border-radius:5px;padding:6px;">
+                    <div class="mini-badge" style="margin-bottom:4px;">Active</div>
+                    <div style="font-size:9px;font-weight:700;color:var(--text);">Clarify Positioning</div>
+                    <div class="mini-progress mt8"><div class="mini-prog-fill" style="width:20%"></div></div>
+                    <div style="font-size:8px;color:var(--green);font-weight:600;margin-top:2px;">20%</div>
+                  </div>
+                  <div style="border:1px solid var(--border);border-radius:5px;padding:6px;">
+                    <div style="font-size:9px;font-weight:700;color:var(--text);margin-bottom:4px;">Build Model</div>
+                    <div style="font-size:8px;color:var(--text-faint);">Not Started</div>
+                  </div>
+                  <div style="border:1px solid var(--border);border-radius:5px;padding:6px;">
+                    <div style="font-size:9px;font-weight:700;color:var(--text);margin-bottom:4px;">Optimize Ops</div>
+                    <div style="font-size:8px;color:var(--text-faint);">Not Started</div>
+                  </div>
+                  <div style="border:1px solid var(--border);border-radius:5px;padding:6px;">
+                    <div style="font-size:9px;font-weight:700;color:var(--text);margin-bottom:4px;">Scale Prep</div>
+                    <div style="font-size:8px;color:var(--text-faint);">Not Started</div>
+                  </div>
+                </div>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px;">
+                <div class="mini-card">
+                  <div class="mini-card-lbl">Partners</div>
+                  <div class="mini-row"><div class="mini-avatar" style="background:#FF9900;">a</div><div style="font-size:10px;font-weight:600;">AWS Activate</div><div class="mini-btn">Go</div></div>
+                  <div class="mini-row"><div class="mini-avatar" style="background:#635BFF;">S</div><div style="font-size:10px;font-weight:600;">Stripe</div><div class="mini-btn">Go</div></div>
+                </div>
+                <div class="mini-card">
+                  <div class="mini-card-lbl">Advisors</div>
+                  <div class="mini-row"><div class="mini-avatar" style="background:var(--green);">DW</div><div style="font-size:10px;font-weight:600;">D. Wagstaff</div><div class="mini-btn">Book</div></div>
+                  <div class="mini-row"><div class="mini-avatar" style="background:var(--gold);">PS</div><div style="font-size:10px;font-weight:600;">P. Shah</div><div class="mini-btn">Book</div></div>
+                </div>
+                <div class="mini-card">
+                  <div class="mini-card-lbl">Activity</div>
+                  <div style="font-size:10px;color:var(--text-soft);padding:3px 0;">↑ Score updated today</div>
+                  <div style="font-size:10px;color:var(--text-soft);padding:3px 0;">✓ Path action completed</div>
+                  <div style="font-size:10px;color:var(--text-soft);padding:3px 0;">📞 Advisor call done</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="sec-tag">Screen 01 · Home</div>
+        <h3 style="font-size:26px;font-weight:800;color:var(--text);margin:10px 0 16px;letter-spacing:-0.01em;">The founder's central hub.</h3>
+        <p class="body">This is the first screen a member sees after logging in. Not a generic feed. A personalized brief built from their Stage Score, archetype, and behavior data. Every element on this screen is different for every founder.</p>
+        <div class="divider"></div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div class="card-gold"><strong>Score Card</strong><p class="body mt8">The Eprenz Score (0-1000) is the organizing metric of the entire OS. Shows current number, weekly trend, a sparkline, and stage placement. This is the first number a founder checks.</p></div>
+          <div class="card"><strong>Personalized Path</strong><p class="body mt8">Four milestone cards, each showing progress. The active step is highlighted. Steps are chosen by the AI based on the founder's Score, archetype, and challenges — not a fixed template.</p></div>
+          <div class="card"><strong>Partner & Advisor Matches</strong><p class="body mt8">Only the partners and advisors matched to the founder's current needs appear here. Not a full directory. A curated, trigger-based shortlist. Each advisor shows rating and specialty.</p></div>
+          <div class="card"><strong>Recent Activity</strong><p class="body mt8">A live feed of what changed: Score updates, path actions completed, advisor calls, partner connections. Creates a sense of momentum and accountability.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPASS TAB -->
+    <div class="tab-panel" id="tab-compass">
+      <div>
+        <div class="screen-wrap">
+          <div class="browser-bar"><div class="b-dot"></div><div class="b-dot"></div><div class="b-dot"></div><div class="b-url">app.eprenz.com/compass</div></div>
+          <div class="screen-inner" style="display:flex;min-height:420px;">
+            <div class="mini-sidebar"><div class="mini-sb-logo">Eprenz.</div><div class="mini-nav">⌂ Home</div><div class="mini-nav active">◎ Compass</div><div class="mini-nav">↗ Path</div><div class="mini-nav">⬡ Partners</div><div class="mini-nav">◈ Advisors</div></div>
+            <div class="mini-main">
+              <div style="max-width:360px;margin:0 auto;">
+                <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text-faint);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;"><span>Step 4 of 6</span><span style="color:var(--green);">8 min left</span></div>
+                <div class="mini-progress" style="margin-bottom:16px;"><div class="mini-prog-fill" style="width:66%;"></div></div>
+                <div style="font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Business Model</div>
+                <div style="font-size:16px;font-weight:700;color:var(--text);line-height:1.3;margin-bottom:4px;">How would you describe your current business model?</div>
+                <div style="font-size:10px;color:var(--text-faint);margin-bottom:14px;">This calibrates your Stage Score and personalized path.</div>
+                <div style="border:1px solid var(--border);border-radius:6px;padding:10px 12px;margin-bottom:8px;font-size:12px;color:var(--text);">Not yet defined</div>
+                <div style="border:1px solid var(--border);border-radius:6px;padding:10px 12px;margin-bottom:8px;font-size:12px;color:var(--text);">Early model / evolving</div>
+                <div style="border:1.5px solid var(--green);border-radius:6px;padding:10px 12px;margin-bottom:8px;font-size:12px;color:var(--green);font-weight:600;background:rgba(26,51,41,0.04);">✓ Defined and working</div>
+                <div style="border:1px solid var(--border);border-radius:6px;padding:10px 12px;margin-bottom:14px;font-size:12px;color:var(--text);">Scalable and repeatable</div>
+                <div style="display:flex;justify-content:space-between;gap:10px;">
+                  <div style="border:1px solid var(--border);border-radius:6px;padding:8px 16px;font-size:11px;font-weight:600;color:var(--text-soft);">← Back</div>
+                  <div style="background:var(--green);border-radius:6px;padding:8px 20px;font-size:11px;font-weight:600;color:#fff;flex:1;text-align:center;">Next →</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="sec-tag">Screen 02 · Compass</div>
+        <h3 style="font-size:26px;font-weight:800;color:var(--text);margin:10px 0 16px;letter-spacing:-0.01em;">The assessment that replaces Zoho.</h3>
+        <p class="body">The Compass assessment is the founding action of every member's OS journey. 15-25 adaptive questions across six sections. It replaces the external Zoho survey entirely and produces the structured profile that drives every other feature in the OS.</p>
+        <div class="divider"></div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div class="card-gold"><strong>Adaptive, not static</strong><p class="body mt8">Questions branch based on prior answers. A pre-revenue founder does not see the same questions as a $500K MRR founder. Branching logic is AI-driven.</p></div>
+          <div class="card"><strong>Six sections</strong><p class="body mt8">Business basics, stage signals, archetype indicators, current challenges, goals, and capital strategy. 8-12 minutes. Auto-save and resume. Progress bar keeps completion rates high.</p></div>
+          <div class="card"><strong>Produces structured data</strong><p class="body mt8">Every answer produces a profile field: stage placement, archetype tag, top 3 challenges, capital model, industry, geography. These fields power the Score, Path, Partner Triggers, and Advisor Console — not just a survey result.</p></div>
+          <div class="card"><strong>Re-assessment built in</strong><p class="body mt8">Light pulse check-ins at Day 30, 60, 90. Full re-assessment every 6 months. The diagnostic is alive, not a one-time gate.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PATH TAB -->
+    <div class="tab-panel" id="tab-path">
+      <div>
+        <div class="screen-wrap">
+          <div class="browser-bar"><div class="b-dot"></div><div class="b-dot"></div><div class="b-dot"></div><div class="b-url">app.eprenz.com/path</div></div>
+          <div class="screen-inner" style="display:flex;min-height:420px;">
+            <div class="mini-sidebar"><div class="mini-sb-logo">Eprenz.</div><div class="mini-nav">⌂ Home</div><div class="mini-nav">◎ Compass</div><div class="mini-nav active">↗ Path</div><div class="mini-nav">⬡ Partners</div><div class="mini-nav">◈ Advisors</div></div>
+            <div class="mini-main">
+              <div class="mini-header">Your Path</div>
+              <div style="display:flex;gap:4px;margin-bottom:12px;">
+                <div style="background:var(--green);color:#fff;padding:4px 12px;border-radius:5px;font-size:10px;font-weight:600;">Active (4)</div>
+                <div style="background:var(--bg-dim);padding:4px 12px;border-radius:5px;font-size:10px;font-weight:600;color:var(--text-soft);">Completed (2)</div>
+              </div>
+              <div class="mini-step active-step">
+                <div class="mini-step-name">1 · Clarify Positioning</div>
+                <div style="font-size:9px;color:var(--text-soft);">Define your value proposition</div>
+                <div class="mini-progress mt8"><div class="mini-prog-fill" style="width:20%"></div></div>
+                <div style="font-size:8px;color:var(--green);font-weight:600;margin-top:2px;">20% · In Progress</div>
+              </div>
+              <div class="mini-step">
+                <div class="mini-step-name">2 · Build Scalable Model</div>
+                <div style="font-size:9px;color:var(--text-soft);">Strengthen your business model</div>
+                <div class="mini-progress mt8"><div class="mini-prog-fill" style="width:0%"></div></div>
+                <div style="font-size:8px;color:var(--text-faint);margin-top:2px;">Not Started</div>
+              </div>
+              <div class="mini-step">
+                <div class="mini-step-name">3 · Optimize Operations</div>
+                <div style="font-size:9px;color:var(--text-soft);">Build efficient systems</div>
+                <div class="mini-progress mt8"><div class="mini-prog-fill" style="width:0%"></div></div>
+                <div style="font-size:8px;color:var(--text-faint);margin-top:2px;">Not Started</div>
+              </div>
+              <div class="mini-step">
+                <div class="mini-step-name">4 · Prepare to Scale</div>
+                <div style="font-size:9px;color:var(--text-soft);">Get scale ready</div>
+                <div class="mini-progress mt8"><div class="mini-prog-fill" style="width:0%"></div></div>
+                <div style="font-size:8px;color:var(--text-faint);margin-top:2px;">Locked</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="sec-tag">Screen 03 · Path</div>
+        <h3 style="font-size:26px;font-weight:800;color:var(--text);margin:10px 0 16px;letter-spacing:-0.01em;">The founder's roadmap to growth.</h3>
+        <p class="body">The Path is a personalized roadmap of milestones tied to the founder's current stage. Unlike a fixed curriculum, each step is curated by AI based on the founder's Score, archetype, and challenges. Active steps are sequenced by highest leverage.</p>
+        <div class="divider"></div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div class="card-gold"><strong>Dynamic, not fixed</strong><p class="body mt8">Steps change as the founder progresses. A founder who flags "cashflow" as their top challenge gets different steps than one flagging "hiring". The path is a living document.</p></div>
+          <div class="card"><strong>Linked to MN lessons</strong><p class="body mt8">Each step is backed by specific Mighty Networks lessons (all 34+ tagged by stage and archetype). Completing a lesson moves the progress bar. The OS knows what was done and what wasn't.</p></div>
+          <div class="card"><strong>Milestone locking</strong><p class="body mt8">Later steps are locked until the prior step reaches 60%+ completion. This prevents founders from skipping fundamentals. The lock is visible but explainable — founders see exactly what they need to unlock the next stage.</p></div>
+          <div class="card"><strong>Active vs Completed tabs</strong><p class="body mt8">Completed steps are archived but visible. Founders can see their progress trajectory. This feeds the Execution Discipline dimension of their Stage Score.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PARTNERS TAB -->
+    <div class="tab-panel" id="tab-partners">
+      <div>
+        <div class="screen-wrap">
+          <div class="browser-bar"><div class="b-dot"></div><div class="b-dot"></div><div class="b-dot"></div><div class="b-url">app.eprenz.com/partners</div></div>
+          <div class="screen-inner" style="display:flex;min-height:420px;">
+            <div class="mini-sidebar"><div class="mini-sb-logo">Eprenz.</div><div class="mini-nav">⌂ Home</div><div class="mini-nav">◎ Compass</div><div class="mini-nav">↗ Path</div><div class="mini-nav active">⬡ Partners</div><div class="mini-nav">◈ Advisors</div></div>
+            <div class="mini-main">
+              <div class="mini-header">Partner Network</div>
+              <div style="display:flex;gap:4px;margin-bottom:12px;flex-wrap:wrap;">
+                <div style="background:var(--green);color:#fff;padding:4px 10px;border-radius:5px;font-size:9px;font-weight:600;">All</div>
+                <div style="background:var(--bg-dim);padding:4px 10px;border-radius:5px;font-size:9px;font-weight:600;color:var(--text-soft);">Technology</div>
+                <div style="background:var(--bg-dim);padding:4px 10px;border-radius:5px;font-size:9px;font-weight:600;color:var(--text-soft);">Finance</div>
+                <div style="background:var(--bg-dim);padding:4px 10px;border-radius:5px;font-size:9px;font-weight:600;color:var(--text-soft);">Legal</div>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                <div class="mini-card" style="padding:12px;"><div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;"><div class="mini-avatar" style="background:#FF9900;font-size:10px;">a</div><div><div style="font-size:11px;font-weight:700;">AWS Activate</div><div style="font-size:9px;color:var(--success);font-weight:600;">95% Match</div></div></div><div style="font-size:9px;color:var(--text-soft);margin-bottom:8px;">Cloud credits and startup support. Up to $100K.</div><div class="mini-btn" style="display:block;text-align:center;">Connect →</div></div>
+                <div class="mini-card" style="padding:12px;"><div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;"><div class="mini-avatar" style="background:#635BFF;">S</div><div><div style="font-size:11px;font-weight:700;">Stripe</div><div style="font-size:9px;color:var(--success);font-weight:600;">92% Match</div></div></div><div style="font-size:9px;color:var(--text-soft);margin-bottom:8px;">Payment infrastructure. Revenue recognition built in.</div><div class="mini-btn" style="display:block;text-align:center;">Connect →</div></div>
+                <div class="mini-card" style="padding:12px;border-color:var(--gold);"><div style="font-size:8px;font-weight:700;color:var(--gold);margin-bottom:6px;">◆ TRIGGERED: CASHFLOW</div><div style="font-size:11px;font-weight:700;">Trenchant CFO</div><div style="font-size:9px;color:var(--success);font-weight:600;margin-bottom:6px;">96% Match</div><div class="mini-btn" style="display:block;text-align:center;background:var(--gold);">Connect →</div></div>
+                <div class="mini-card" style="padding:12px;"><div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;"><div class="mini-avatar" style="background:#FF7A59;">H</div><div><div style="font-size:11px;font-weight:700;">HubSpot</div><div style="font-size:9px;color:var(--success);font-weight:600;">91% Match</div></div></div><div style="font-size:9px;color:var(--text-soft);margin-bottom:8px;">CRM & growth platform for scaling teams.</div><div class="mini-btn" style="display:block;text-align:center;">Connect →</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="sec-tag">Screen 04 · Partners</div>
+        <h3 style="font-size:26px;font-weight:800;color:var(--text);margin:10px 0 16px;letter-spacing:-0.01em;">Trigger-based, not directory-based.</h3>
+        <p class="body">The Partner Network is not a static directory. It is a programmatic matching system. Partners are tagged with the signals they serve. When a founder's profile or behavior hits a trigger, the relevant partner surfaces — with context about why they were matched.</p>
+        <div class="divider"></div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div class="card-gold"><strong>The trigger model</strong><p class="body mt8">When a founder flags "cashflow" in assessment or shows cashflow behavior (spending 14 min on a cashflow worksheet), the CFO/bookkeeping partners surface. Trigger → match → surface → notify. All automatic.</p></div>
+          <div class="card"><strong>Match score</strong><p class="body mt8">Each partner card shows a % match score calculated from the founder's profile against the partner's specialty. Higher match = ranked higher. Founders see why the match was made.</p></div>
+          <div class="card"><strong>Eprenz-exclusive offers</strong><p class="body mt8">Partners enrolled in the Compass network offer Eprenz-exclusive terms (discounts, extended trials, priority access). This makes the Partner Network a tangible membership benefit beyond community.</p></div>
+          <div class="card"><strong>Revenue model for Eprenz</strong><p class="body mt8">Partners pay: setup fee + per-qualified-lead fee + revenue share on closed deals. Partner revenue starts in Month 6. This is the primary new revenue stream from the Compass wedge.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADVISORS TAB -->
+    <div class="tab-panel" id="tab-advisors">
+      <div>
+        <div class="screen-wrap">
+          <div class="browser-bar"><div class="b-dot"></div><div class="b-dot"></div><div class="b-dot"></div><div class="b-url">advisor.eprenz.com</div></div>
+          <div class="screen-inner" style="display:flex;min-height:420px;">
+            <div class="mini-sidebar"><div class="mini-sb-logo">Eprenz.</div><div class="mini-nav active">◈ Advisors</div><div style="margin-top:12px;font-size:9px;font-weight:700;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.12em;padding:0 6px;margin-bottom:6px;">Pipeline</div><div class="mini-nav" style="color:rgba(255,255,255,0.7);">Ready (14)</div><div class="mini-nav">In Convo (7)</div><div class="mini-nav">Closed (5)</div></div>
+            <div class="mini-main">
+              <div class="mini-header">Qualified Founders</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;margin-bottom:12px;">
+                <div class="mini-card" style="padding:8px;"><div style="font-size:16px;font-weight:800;color:var(--green);">14</div><div style="font-size:8px;color:var(--text-faint);text-transform:uppercase;letter-spacing:0.08em;font-weight:600;">Ready Now</div></div>
+                <div class="mini-card" style="padding:8px;"><div style="font-size:16px;font-weight:800;color:var(--green);">628</div><div style="font-size:8px;color:var(--text-faint);text-transform:uppercase;letter-spacing:0.08em;font-weight:600;">Avg Score</div></div>
+                <div class="mini-card" style="padding:8px;"><div style="font-size:16px;font-weight:800;color:var(--success);">42%</div><div style="font-size:8px;color:var(--text-faint);text-transform:uppercase;letter-spacing:0.08em;font-weight:600;">Close Rate</div></div>
+                <div class="mini-card" style="padding:8px;"><div style="font-size:16px;font-weight:800;color:var(--green);">11d</div><div style="font-size:8px;color:var(--text-faint);text-transform:uppercase;letter-spacing:0.08em;font-weight:600;">Avg Cycle</div></div>
+              </div>
+              <div class="mini-card" style="padding:10px;border-left:3px solid var(--success);margin-bottom:6px;">
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <div class="mini-avatar" style="background:var(--green);">RK</div>
+                  <div style="flex:1;"><div style="font-size:11px;font-weight:700;">Raghav K.</div><div style="font-size:9px;color:var(--text-faint);">Grow Stage · cashflow, pricing</div></div>
+                  <div style="font-size:14px;font-weight:800;color:var(--green);">642</div>
+                  <div class="mini-btn">Book</div>
+                </div>
+              </div>
+              <div class="mini-card" style="padding:10px;border-left:3px solid var(--success);margin-bottom:6px;">
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <div class="mini-avatar" style="background:var(--gold);">PS</div>
+                  <div style="flex:1;"><div style="font-size:11px;font-weight:700;">Priya N.</div><div style="font-size:9px;color:var(--text-faint);">Profit Stage · raising Series A</div></div>
+                  <div style="font-size:14px;font-weight:800;color:var(--green);">714</div>
+                  <div class="mini-btn">Book</div>
+                </div>
+              </div>
+              <div class="mini-card" style="padding:10px;border-left:3px solid #E8A838;">
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <div class="mini-avatar" style="background:#4A6FA0;">MO</div>
+                  <div style="flex:1;"><div style="font-size:11px;font-weight:700;">Marcus O.</div><div style="font-size:9px;color:var(--text-faint);">Grow Stage · stalled</div></div>
+                  <div style="font-size:14px;font-weight:800;color:var(--green);">655</div>
+                  <div class="mini-btn" style="background:#9AA89E;">Check</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="sec-tag">Screen 05 · Advisors</div>
+        <h3 style="font-size:26px;font-weight:800;color:var(--text);margin:10px 0 16px;letter-spacing:-0.01em;">The bottleneck fix.</h3>
+        <p class="body">The meeting-to-close rate has been near zero because advisor calls start with discovery: "tell me about your business." Compass eliminates discovery. Every founder in the advisor feed has completed the assessment, engaged with the platform, identified a need, and opted in. First call starts with "let's solve X."</p>
+        <div class="divider"></div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div class="card-gold"><strong>Qualified, not random</strong><p class="body mt8">Founders appear in the feed only when they meet qualification criteria. The feed is never empty (if there are 0 qualified founders, that's a signal to David) and never cluttered.</p></div>
+          <div class="card"><strong>Score + context upfront</strong><p class="body mt8">Each founder card shows Stage Score, trend, archetype, and the specific challenges they flagged. The advisor knows more in 10 seconds than a 20-minute discovery call would reveal.</p></div>
+          <div class="card"><strong>Stalled founders flagged</strong><p class="body mt8">Founders whose Score hasn't moved in 2+ weeks appear in an amber "Stalled" status. This prompts proactive outreach before they churn. The OS does the retention monitoring automatically.</p></div>
+          <div class="card"><strong>Conversion attribution</strong><p class="body mt8">Every advisor call is tracked. Close rate, cycle time, and revenue generated per advisor are visible in the console. Over time this builds a dataset of what advisory conversations lead to outcomes.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ATLAS TAB -->
+    <div class="tab-panel" id="tab-atlas">
+      <div>
+        <div class="screen-wrap">
+          <div class="browser-bar"><div class="b-dot"></div><div class="b-dot"></div><div class="b-dot"></div><div class="b-url">app.eprenz.com/atlas</div></div>
+          <div class="screen-inner" style="display:flex;min-height:460px;">
+            <div class="mini-sidebar"><div class="mini-sb-logo">Eprenz.</div><div class="mini-nav">⌂ Home</div><div class="mini-nav">◎ Compass</div><div class="mini-nav">↗ Path</div><div class="mini-nav">⬡ Partners</div><div class="mini-nav">◈ Advisors</div><div class="mini-nav active" style="background:rgba(196,148,58,0.2);color:var(--gold);">✦ Atlas AI</div></div>
+            <div class="mini-main" style="padding:0;">
+              <div class="mini-chat">
+                <div class="mini-chat-lbl">✦ Atlas · CFO Mode · Grow Stage</div>
+                <div class="mini-chat-name">Your AI Co-Founder</div>
+                <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;">
+                  <div style="background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.8);padding:3px 8px;border-radius:100px;font-size:9px;font-weight:500;">Acme Labs</div>
+                  <div style="background:rgba(196,148,58,0.2);color:var(--gold);padding:3px 8px;border-radius:100px;font-size:9px;font-weight:600;">Score 612</div>
+                  <div style="background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.8);padding:3px 8px;border-radius:100px;font-size:9px;font-weight:500;">Grow Stage</div>
+                </div>
+              </div>
+              <div style="padding:12px 14px;flex:1;">
+                <div class="mini-msg-bot" style="margin-bottom:8px;"><div style="font-size:8px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;">ATLAS · READY</div>Hi Alex. Cash flow score dropped 14% this month. Want to work through that?<div style="margin-top:6px;padding-top:6px;border-top:1px solid var(--border);font-size:9px;color:var(--text-faint);font-style:italic;">Reading: Acme Labs profile · CFO playbook</div></div>
+                <div class="mini-msg-user">Should I raise now or wait 6 months?</div>
+                <div class="mini-msg-bot"><div style="font-size:8px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;">ATLAS · CFO MODE</div>Wait. At 12% MoM you hit <strong>$1M ARR in ~5 months</strong>. Raise at $1M gets you meaningfully better terms. Runway is 11 months — no pressure to rush. Based on 4 similar Eprenz founders, those who waited got 1.7x better valuation.</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:10px;">
+                  <div style="background:rgba(107,79,160,0.06);border:1px solid rgba(107,79,160,0.15);border-radius:6px;padding:6px;cursor:pointer;font-size:9px;color:var(--text);">What should I do in those 5 months?</div>
+                  <div style="background:rgba(107,79,160,0.06);border:1px solid rgba(107,79,160,0.15);border-radius:6px;padding:6px;cursor:pointer;font-size:9px;color:var(--text);">Why did cashflow drop this month?</div>
+                </div>
+              </div>
+              <div class="mini-input" style="margin:0 12px 12px;"><span>Ask Atlas anything...</span><div class="mini-send">↑</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="sec-tag" style="color:rgba(107,79,160,0.9);">Screen 06 · Atlas AI</div>
+        <h3 style="font-size:26px;font-weight:800;color:var(--text);margin:10px 0 16px;letter-spacing:-0.01em;">The screen that doesn't exist on any other founder platform.</h3>
+        <p class="body">Atlas is Eprenz's AI co-founder. Not a chatbot. An agent trained on the founder's business, the Eprenz playbook, and anonymized data from similar founders in the community. Available 24/7. Switches between CFO, CMO, Sales, People, and Legal modes.</p>
+        <div class="divider"></div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div class="card" style="border-left:3px solid #6B4FA0;"><strong style="color:#6B4FA0;">Live Anthropic API</strong><p class="body mt8">Atlas is powered by Claude. Every message hits the Anthropic API in real time. Responses are context-aware — Atlas knows the founder's Score, stage, revenue, and current challenges.</p></div>
+          <div class="card"><strong>5 specialist agents</strong><p class="body mt8">CFO (financial clarity, fundraising), CMO (brand, GTM), Sales (pipeline, pricing), People (hiring, ESOP), Legal (contracts, compliance). Each agent shares the founder's profile so context never needs repeating.</p></div>
+          <div class="card"><strong>Cites Eprenz data</strong><p class="body mt8">Atlas references anonymized patterns from similar founders inside Eprenz. "4 founders at similar stage did X. Those who waited got 1.7x better valuation." This is data no generic AI tool has.</p></div>
+          <div class="card-gold"><strong>The premium moat</strong><p class="body mt8">General Atlas is free for all members. Specialist agents unlock at the Eprenz Pro tier. This creates a clear upgrade path: members start free, see value from Atlas, then pay for deeper domain expertise.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════ -->
+<!-- SECTION: AI LAYER -->
+<!-- ════════════════════════════════════ -->
+<div id="ai"></div>
+<div class="section-dark">
+  <div class="container">
+    <div class="sec-num white">03</div>
+    <div class="sec-tag white">The AI Layer</div>
+    <h2 class="big white">AI is not a feature. <em>It is everywhere.</em></h2>
+    <p class="sec-lede white mt16">Nine distinct AI integrations across the OS. Not a chatbot bolted on. AI is the connective tissue between every module. Each integration does real work humans cannot do at scale.</p>
+
+    <div class="ai-grid mt48">
+      <div class="ai-card"><div class="ai-icon">📋</div><div class="ai-num">AI · 01</div><h4>Assessment Intelligence</h4><p>Survey adapts in real time. AI evaluates each answer and branches accordingly. A founder mentioning "fundraising in 6 months" in free text triggers IB-partner routing.</p><div class="ai-example">Outcome: 15-25 questions that feel like 6 because only the right ones are asked.</div></div>
+      <div class="ai-card"><div class="ai-icon">📊</div><div class="ai-num">AI · 02</div><h4>Scoring & Trajectory</h4><p>Stage Score is not a simple sum. AI weighs dimensions contextually for each archetype and predicts which founders will stage-transition in 3-6 months.</p><div class="ai-example">Outcome: Founders with rising trajectories get routed to higher-value partners and investors earlier.</div></div>
+      <div class="ai-card"><div class="ai-icon">🎯</div><div class="ai-num">AI · 03</div><h4>Path Personalization</h4><p>Ranks which MN lesson, which partner, which peer to surface. Draws on current Score, archetype, recent behavior, and what worked for similar founders.</p><div class="ai-example">Outcome: "Pricing for Retention" appears above "Hiring First Engineer" because churn signal is hotter this week.</div></div>
+      <div class="ai-card"><div class="ai-icon">🤝</div><div class="ai-num">AI · 04</div><h4>Atlas Co-Founder</h4><p>Persistent agent trained on the founder's business. Attends calls (via Fireflies), reviews financials weekly, drafts decisions. Available 24/7 inside the app.</p><div class="ai-example">Outcome: Founders get advisor-quality guidance at 3am without waiting for a booked call.</div></div>
+      <div class="ai-card"><div class="ai-icon">⚡</div><div class="ai-num">AI · 05</div><h4>Specialist Agents ×5</h4><p>Five function-specific agents: CFO, CMO, Sales, People, Legal. Each trained on Eprenz IP plus domain frameworks. Shared founder context across all five.</p><div class="ai-example">Outcome: Founder uploads P&L to CFO agent, gets margin analysis referencing their specific MN lesson on unit economics.</div></div>
+      <div class="ai-card"><div class="ai-icon">🔔</div><div class="ai-num">AI · 06</div><h4>Trigger Detection</h4><p>Monitors behavior signals for partner triggers. Founder spends 14 min on a cashflow worksheet + asks CFO agent about runway = cashflow trigger fires.</p><div class="ai-example">Outcome: Bookkeeping partner surfaces before the founder even knows they need one.</div></div>
+      <div class="ai-card"><div class="ai-icon">📝</div><div class="ai-num">AI · 07</div><h4>Advisor Brief Prep</h4><p>Before David walks into a call, AI generates a one-page brief: Score, challenges tried, what's blocking, what to ask first. Discovery becomes execution.</p><div class="ai-example">Outcome: First call opens with "let's solve the pricing question" instead of "tell me about your business."</div></div>
+      <div class="ai-card"><div class="ai-icon">🧭</div><div class="ai-num">AI · 08</div><h4>Decision Analysis</h4><p>Founder posts a real decision. AI surfaces analogous historical cases from Eprenz community data, brings in right peers, proposes a framework from MN lessons.</p><div class="ai-example">Outcome: "Should I let go of my co-founder?" returns 3 Eprenz founders who faced same call + what happened.</div></div>
+      <div class="ai-card"><div class="ai-icon">📅</div><div class="ai-num">AI · 09</div><h4>Weekly Synthesis</h4><p>Every Monday, Atlas synthesizes last 7 days into a one-page brief: what worked, what slipped, the 3 things that would move the Score most this week.</p><div class="ai-example">Outcome: Founders start Monday knowing exactly what matters. No logging in and digging for context.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════ -->
+<!-- SECTION: ARCHITECTURE -->
+<!-- ════════════════════════════════════ -->
+<div id="architecture"></div>
+<div class="section-dark" style="background:var(--green-deep);">
+  <div class="container">
+    <div class="sec-num white">04</div>
+    <div class="sec-tag white">The Architecture</div>
+    <h2 class="big white">Six layers. <em>AI is the fabric.</em></h2>
+    <p class="sec-lede white mt16">The OS is not a single app. Six layers stacked. The AI Intelligence Layer sits between the interfaces and the product modules, powering every interaction without the user seeing it.</p>
+
+    <div class="arch-stack mt48">
+      <div class="arch-layer l-users">
+        <div class="arch-lbl"><span>Users</span><span style="font-size:10px;">Who operates here</span></div>
+        <div class="arch-chips">
+          <span class="chip">Founders (all stages, all archetypes)</span>
+          <span class="chip">Advisors (David & team)</span>
+          <span class="chip">Solution Partners</span>
+          <span class="chip">Mentors / Post-Exit</span>
+          <span class="chip gold">Future: Investors & Integrators</span>
+        </div>
+      </div>
+      <div class="arch-layer l-ui" style="margin-top:4px;">
+        <div class="arch-lbl"><span>Interfaces</span><span style="font-size:10px;">Surfaces</span></div>
+        <div class="arch-chips">
+          <span class="chip green">Founder App · Flutter</span>
+          <span class="chip green">Advisor Console · Next.js</span>
+          <span class="chip green">Partner Portal · Next.js</span>
+          <span class="chip">Email · Brevo</span>
+          <span class="chip">Weekly Brief · Auto-generated</span>
+          <span class="chip gold">Future: Public API</span>
+        </div>
+      </div>
+      <div class="arch-layer l-ai" style="margin-top:4px;">
+        <div class="arch-lbl ai-lbl"><span>✦ AI Intelligence Layer — The Fabric</span><span style="font-size:10px;">Anthropic Claude · 9 integrations</span></div>
+        <div class="arch-chips">
+          <span class="chip ai">Scoring Engine</span><span class="chip ai">Personalization</span>
+          <span class="chip ai">Atlas Co-Founder</span><span class="chip ai">5 Specialist Agents</span>
+          <span class="chip ai">Trigger Detection</span><span class="chip ai">Advisor Brief Prep</span>
+          <span class="chip ai">Decision Analysis</span><span class="chip ai">Weekly Synthesis</span>
+          <span class="chip ai">Assessment Intelligence</span>
+        </div>
+      </div>
+      <div class="arch-layer l-mod" style="margin-top:4px;">
+        <div class="arch-lbl"><span>Product Modules</span><span style="font-size:10px;">What each layer delivers</span></div>
+        <div class="mod-row">
+          <div class="mod-yr y1">YEAR 1<br>COMPASS</div>
+          <div class="arch-chips">
+            <span class="chip green">Smart Assessment</span><span class="chip green">Stage Score</span>
+            <span class="chip green">Personalized Path</span><span class="chip green">Partner Triggers</span>
+            <span class="chip green">Advisor Qualification</span><span class="chip green">Re-Assessment</span>
+          </div>
+        </div>
+        <div class="mod-row">
+          <div class="mod-yr y2">YEAR 2<br>EXPAND</div>
+          <div class="arch-chips">
+            <span class="chip ai">Atlas Co-Founder</span><span class="chip ai">Specialist Agents</span>
+            <span class="chip ai">Weekly Brief Auto</span><span class="chip">Decision Marketplace</span>
+            <span class="chip">Peer Cohort Engine</span><span class="chip">Member Marketplace</span>
+          </div>
+        </div>
+        <div class="mod-row">
+          <div class="mod-yr y3">YEAR 3+<br>EXTEND</div>
+          <div class="arch-chips">
+            <span class="chip gold">Eprenz Capital Arm</span><span class="chip gold">Eprenz Credential</span>
+            <span class="chip gold">Sign-in with Eprenz</span><span class="chip gold">Public Protocol API</span>
+            <span class="chip gold">Default Rail Integration</span>
+          </div>
+        </div>
+      </div>
+      <div class="arch-layer l-data" style="margin-top:4px;">
+        <div class="arch-lbl"><span>Data Substrate</span><span style="font-size:10px;">What compounds over time</span></div>
+        <div class="arch-chips">
+          <span class="chip">Founder Profiles</span><span class="chip">Stage Scores (versioned)</span>
+          <span class="chip">Behavior Signals</span><span class="chip">Trigger Events</span>
+          <span class="chip">Partner Outcomes</span><span class="chip">Advisor Notes</span>
+          <span class="chip">Decision History</span><span class="chip">Relationship Graph</span>
+        </div>
+      </div>
+      <div class="arch-layer l-infra" style="margin-top:4px;">
+        <div class="arch-lbl"><span>Infrastructure</span><span style="font-size:10px;">Current stack</span></div>
+        <div class="arch-chips">
+          <span class="chip">Supabase · DB & Auth</span><span class="chip">Anthropic Claude · AI</span>
+          <span class="chip">Vercel · Web</span><span class="chip">Brevo · Email</span>
+          <span class="chip">Cloudinary · Media</span><span class="chip">Fireflies · Call AI</span>
+          <span class="chip">Flutter · Mobile App</span><span class="chip">Next.js · Web Consoles</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt32">
+      <div class="diagram">
+        <div class="diag-label">HOW A FOUNDER FLOWS THROUGH COMPASS</div>
+        <div class="flow mt32">
+          <div class="flow-node active"><div class="fn-step">STEP 01</div><div class="fn-name">Assess</div><div class="fn-desc">Adaptive survey in-app on signup</div></div>
+          <div class="flow-node"><div class="fn-step">STEP 02</div><div class="fn-name">Score</div><div class="fn-desc">612/1000 generated, archetype tagged</div></div>
+          <div class="flow-node"><div class="fn-step">STEP 03</div><div class="fn-name">Personalize</div><div class="fn-desc">Path, lessons, peers auto-tailored</div></div>
+          <div class="flow-node"><div class="fn-step">STEP 04</div><div class="fn-name">Activate</div><div class="fn-desc">Partner triggered, advisor qualified</div></div>
+          <div class="flow-node"><div class="fn-step">STEP 05</div><div class="fn-name">Convert</div><div class="fn-desc">Partner revenue. Founder outcomes.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════ -->
+<!-- SECTION: BUSINESS MODEL -->
+<!-- ════════════════════════════════════ -->
+<div id="business"></div>
+<div class="section">
+  <div class="sec-num">05</div>
+  <div class="sec-tag">Business Model</div>
+  <h2 class="big">How the OS <em>makes money.</em></h2>
+  <p class="sec-lede mt16">Six revenue streams across three horizons. The wedge generates the first two in Year 1. Premium tier and capital arm follow. Long-term, the protocol and credential layers add infrastructure revenue that compounds indefinitely.</p>
+
+  <div class="bm-grid mt48">
+    <div class="bm-card">
+      <div class="card-label">Customer Segments</div>
+      <div class="bm-title">Who pays Eprenz</div>
+      <div class="bm-item"><span class="bm-item-name">Founders</span><span class="bm-item-tag">Primary</span></div>
+      <div class="bm-item-desc">All stages, all archetypes. Pay membership today, premium tomorrow, capital fees long-term.</div>
+      <div class="bm-item"><span class="bm-item-name">Solution Partners</span><span class="bm-item-tag">Year 1</span></div>
+      <div class="bm-item-desc">CFO firms, recruiters, lawyers, IB, agencies. Pay for qualified leads + revenue share.</div>
+      <div class="bm-item"><span class="bm-item-name">Integrators</span><span class="bm-item-tag">Year 3+</span></div>
+      <div class="bm-item-desc">Accelerators, banks, universities, govt schemes. Pay for API access and white-label.</div>
+      <div class="bm-item"><span class="bm-item-name">Fund Investors / LPs</span><span class="bm-item-tag">Year 2+</span></div>
+      <div class="bm-item-desc">Into the Eprenz Capital arm. Returns from OS-validated founder investments.</div>
+    </div>
+
+    <div class="bm-card primary">
+      <div class="card-label white">Value Propositions</div>
+      <div class="bm-title">Why each segment pays</div>
+      <div class="bm-item"><span class="bm-item-name">For Founders</span><span class="bm-item-tag" style="color:rgba(255,255,255,0.4);">Member</span></div>
+      <div class="bm-item-desc">Stop cobbling 10 tools. One OS, stage-aware AI, vetted partners, peer cohort, Score that proves progress.</div>
+      <div class="bm-item"><span class="bm-item-name">For Partners</span><span class="bm-item-tag" style="color:rgba(255,255,255,0.4);">Triggers</span></div>
+      <div class="bm-item-desc">Qualified leads with full context. No cold outreach. Founders arrive with a stated need and a Score.</div>
+      <div class="bm-item"><span class="bm-item-name">For Integrators</span><span class="bm-item-tag" style="color:rgba(255,255,255,0.4);">Infra</span></div>
+      <div class="bm-item-desc">Trusted Stage Score and founder identity layer. Plug in instead of building it from scratch.</div>
+      <div class="bm-item"><span class="bm-item-name">For Fund LPs</span><span class="bm-item-tag" style="color:rgba(255,255,255,0.4);">Edge</span></div>
+      <div class="bm-item-desc">Data-driven thesis. Only back founders whose Score trajectory is real and verified.</div>
+    </div>
+
+    <div class="bm-card" style="background:rgba(196,148,58,0.06);border-color:rgba(196,148,58,0.25);">
+      <div class="card-label gold">Revenue Streams</div>
+      <div class="bm-title">Six lines, three horizons</div>
+      <div class="bm-item"><span class="bm-item-name">Membership</span><span class="bm-item-tag">Today</span></div>
+      <div class="bm-item-desc">Existing subscription. Unchanged through the wedge build.</div>
+      <div class="bm-item"><span class="bm-item-name">Partner Referrals</span><span class="bm-item-tag">Month 6</span></div>
+      <div class="bm-item-desc">Setup + per-qualified-lead + revenue share on closed deals.</div>
+      <div class="bm-item"><span class="bm-item-name">Founder Premium</span><span class="bm-item-tag">Month 9</span></div>
+      <div class="bm-item-desc">Specialist AI agents, deeper analytics, priority advisor booking.</div>
+      <div class="bm-item"><span class="bm-item-name">Capital Arm</span><span class="bm-item-tag">Year 2-3</span></div>
+      <div class="bm-item-desc">Fund returns from investing in OS-validated founders. Carry + management fee.</div>
+      <div class="bm-item"><span class="bm-item-name">Eprenz Credential</span><span class="bm-item-tag">Year 3</span></div>
+      <div class="bm-item-desc">Certified Founder badge fees. Banks and investors recognize it.</div>
+      <div class="bm-item"><span class="bm-item-name">Protocol / API</span><span class="bm-item-tag">Year 3+</span></div>
+      <div class="bm-item-desc">Accelerators, banks, integrators pay for API access.</div>
+    </div>
+  </div>
+
+  <div class="rev-timeline">
+    <div class="rev-card r1">
+      <div class="rev-horizon">Year 1 · Now to Month 12</div>
+      <ul class="rev-streams">
+        <li class="rev-stream"><span>Membership (existing)</span><span class="rev-stream-when">TODAY</span></li>
+        <li class="rev-stream"><span>Partner referral fees</span><span class="rev-stream-when">M06</span></li>
+        <li class="rev-stream"><span>Founder Premium tier</span><span class="rev-stream-when">M09</span></li>
+      </ul>
+    </div>
+    <div class="rev-card r2">
+      <div class="rev-horizon">Year 2 · The Expand Phase</div>
+      <ul class="rev-streams">
+        <li class="rev-stream" style="color:var(--text);"><span>Atlas Pro (specialist agents)</span><span class="rev-stream-when" style="color:var(--text-faint);">Y2 Q1</span></li>
+        <li class="rev-stream" style="color:var(--text);"><span>Decision Marketplace fees</span><span class="rev-stream-when" style="color:var(--text-faint);">Y2 Q2</span></li>
+        <li class="rev-stream" style="color:var(--text);"><span>Capital Arm LP closes</span><span class="rev-stream-when" style="color:var(--text-faint);">Y2 Q3</span></li>
+      </ul>
+    </div>
+    <div class="rev-card r3">
+      <div class="rev-horizon">Year 3+ · The Extend Phase</div>
+      <ul class="rev-streams">
+        <li class="rev-stream" style="color:var(--text);"><span>Eprenz Credential fees</span><span class="rev-stream-when" style="color:var(--gold);">Y3</span></li>
+        <li class="rev-stream" style="color:var(--text);"><span>Sign-in with Eprenz licensing</span><span class="rev-stream-when" style="color:var(--gold);">Y3</span></li>
+        <li class="rev-stream" style="color:var(--text);"><span>Public Protocol / API</span><span class="rev-stream-when" style="color:var(--gold);">Y3+</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════ -->
+<!-- SECTION: ROADMAP -->
+<!-- ════════════════════════════════════ -->
+<div id="roadmap"></div>
+<div class="section-dim">
+  <div class="container">
+    <div class="sec-num">06</div>
+    <div class="sec-tag">12-Month Roadmap</div>
+    <h2 class="big">Five phases. <em>One outcome.</em></h2>
+    <p class="sec-lede mt16">The Compass wedge delivers in five phases over twelve months. Click each phase to see deliverables and exit criteria. Revenue begins in Phase 3. AI agents ship in Phase 4.</p>
+
+    <div class="roadmap mt48">
+      <div class="phase-card" onclick="togglePhase(this)">
+        <div class="phase-head">
+          <div class="phase-num">I</div>
+          <div class="phase-time">Months 01–02</div>
+          <div><div class="phase-title">Foundation</div><div class="phase-sub">Data model, Score algorithm, assessment design</div></div>
+          <div class="phase-chevron">▾</div>
+        </div>
+        <div class="phase-body">
+          <div>
+            <p class="phase-desc">Nothing user-facing ships in Phase 1. The spine of the OS is established. Assessment logic, Score formula, data schema, partner taxonomy. These underpin everything that follows.</p>
+            <div class="deliverable"><div class="del-dot"></div><div class="del-body"><div class="del-name">Adaptive question tree</div><div class="del-desc">Branching logic finalized across 6 sections. 15-25 questions per founder.</div></div></div>
+            <div class="deliverable"><div class="del-dot"></div><div class="del-body"><div class="del-name">Stage Score algorithm v1</div><div class="del-desc">5-dimension formula, weighting, validated on existing member data.</div></div></div>
+            <div class="deliverable"><div class="del-dot"></div><div class="del-body"><div class="del-name">Supabase schema</div><div class="del-desc">Founders, assessments, scores, archetypes, triggers, partners tables.</div></div></div>
+            <div class="deliverable"><div class="del-dot"></div><div class="del-body"><div class="del-name">Partner tagging framework</div><div class="del-desc">Taxonomy of triggers. Partner registration flow. Pricing terms.</div></div></div>
+          </div>
+          <div class="exit-card">
+            <div class="exit-label">Exit Criteria</div>
+            <div class="exit-item"><div class="exit-check">✓</div>Assessment validated on 20+ existing member profiles</div>
+            <div class="exit-item"><div class="exit-check">✓</div>Score outputs match advisor expectations in qualitative review</div>
+            <div class="exit-item"><div class="exit-check">✓</div>Schema approved and migration plan for Zoho data complete</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-card" onclick="togglePhase(this)">
+        <div class="phase-head">
+          <div class="phase-num">II</div>
+          <div class="phase-time">Months 03–04</div>
+          <div><div class="phase-title">Founder Experience</div><div class="phase-sub">Assessment live, dashboard ships, advisor console v1</div></div>
+          <div class="phase-chevron">▾</div>
+        </div>
+        <div class="phase-body">
+          <div>
+            <p class="phase-desc">The founder-facing product ships. New members onboard through Compass. Existing members re-assess. The Personalized Path View becomes the default home screen.</p>
+            <div class="deliverable"><div class="del-dot"></div><div class="del-body"><div class="del-name">In-app assessment live</div><div class="del-desc">Flutter app. Replaces Zoho for all new members from Day 1.</div></div></div>
+            <div class="deliverable"><div class="del-dot"></div><div class="del-body"><div class="del-name">Personalized Path View</div><div class="del-desc">Dashboard with Score, archetype, next actions, curated MN lessons.</div></div></div>
+            <div class="deliverable"><div class="del-dot"></div><div class="del-body"><div class="del-name">MN lesson tagging complete</div><div class="del-desc">All 34+ lessons tagged by stage and archetype. New lessons follow taxonomy.</div></div></div>
+            <div class="deliverable"><div class="del-dot"></div><div class="del-body"><div class="del-name">Advisor Console v1</div><div class="del-desc">Read-only qualified founder feed for David and senior advisors.</div></div></div>
+          </div>
+          <div class="exit-card">
+            <div class="exit-label">Exit Criteria</div>
+            <div class="exit-item"><div class="exit-check">✓</div>All new members onboarding through Compass (not Zoho)</div>
+            <div class="exit-item"><div class="exit-check">✓</div>60%+ of existing members complete re-assessment</div>
+            <div class="exit-item"><div class="exit-check">✓</div>Advisor Console used in at least 10 calls</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-card" onclick="togglePhase(this)">
+        <div class="phase-head">
+          <div class="phase-num">III</div>
+          <div class="phase-time">Months 05–06</div>
+          <div><div class="phase-title">Revenue Engine</div><div class="phase-sub">Partner trigger system live. First revenue.</div></div>
+          <div class="phase-chevron">▾</div>
+        </div>
+        <div class="phase-body">
+          <div>
+            <p class="phase-desc">The partner trigger system activates. First partner referral revenue flows in Month 6. The wedge pays for itself from this phase forward.</p>
+            <div class="deliverable"><div class="del-dot"></div><div class="del-body"><div class="del-name">Partner Portal live</div><div class="del-desc">Partner-facing console showing matched leads, conversion data, revenue.</div></div></div>
+            <div class="deliverable"><div class="del-dot"></div><div class="del-body"><div class="del-name">Trigger Engine active</div><div class="del-desc">Trigger detection running against founder profiles. Partners surfaced contextually.</div></div></div>
+            <div class="deliverable"><div class="del-dot"></div><div class="del-body"><div class="del-name">Attribution tracking</div><div class="del-desc">Full funnel: surface → click → engage → convert. Revenue share automation.</div></div></div>
+            <div class="deliverable"><div class="del-dot"></div><div class="del-body"><div class="del-name">First 3-5 partners onboarded</div><div class="del-desc">Under the new programmatic model. Existing partner relationships converted.</div></div></div>
+          </div>
+          <div class="exit-card">
+            <div class="exit-label">Exit Criteria</div>
+            <div class="exit-item"><div class="exit-check">✓</div>3+ partners onboarded on programmatic model</div>
+            <div class="exit-item"><div class="exit-check">✓</div>10+ qualified leads delivered to partners</div>
+            <div class="exit-item"><div class="exit-check">✓</div>First closed deal under revenue share model</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-card" onclick="togglePhase(this)">
+        <div class="phase-head">
+          <div class="phase-num">IV</div>
+          <div class="phase-time">Months 07–09</div>
+          <div><div class="phase-title">AI Advisory Layer</div><div class="phase-sub">Atlas and specialist agents ship. Premium tier launches.</div></div>
+          <div class="phase-chevron">▾</div>
+        </div>
+        <div class="phase-body">
+          <div>
+            <p class="phase-desc">Stage-aware AI agents come online. Members get on-demand guidance trained on Eprenz IP. The Persistent AI Co-Founder begins to take shape. Premium tier opens a new revenue line.</p>
+            <div class="deliverable"><div class="del-dot"></div><div class="del-body"><div class="del-name">RAG pipeline over Eprenz IP</div><div class="del-desc">MN lessons, David's frameworks, anonymized outcomes indexed for retrieval.</div></div></div>
+            <div class="deliverable"><div class="del-dot"></div><div class="del-body"><div class="del-name">Atlas general agent</div><div class="del-desc">Stage and archetype-aware chat in the founder app. Free for all members.</div></div></div>
+            <div class="deliverable"><div class="del-dot"></div><div class="del-body"><div class="del-name">5 specialist agents</div><div class="del-desc">CFO, CMO, Sales, People, Legal. Each with domain-specific system prompt + Eprenz IP RAG.</div></div></div>
+            <div class="deliverable"><div class="del-dot"></div><div class="del-body"><div class="del-name">Premium tier launch</div><div class="del-desc">Paid tier with deeper AI access, higher limits, agent customization, priority advisory.</div></div></div>
+          </div>
+          <div class="exit-card">
+            <div class="exit-label">Exit Criteria</div>
+            <div class="exit-item"><div class="exit-check">✓</div>40%+ of active members using Atlas weekly</div>
+            <div class="exit-item"><div class="exit-check">✓</div>Premium tier sold to 10%+ of active members</div>
+            <div class="exit-item"><div class="exit-check">✓</div>AI usage signals feeding back into Stage Score</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-card" onclick="togglePhase(this)">
+        <div class="phase-head">
+          <div class="phase-num">V</div>
+          <div class="phase-time">Months 10–12</div>
+          <div><div class="phase-title">Ambient OS</div><div class="phase-sub">OS stops being a destination. Becomes a layer.</div></div>
+          <div class="phase-chevron">▾</div>
+        </div>
+        <div class="phase-body">
+          <div>
+            <p class="phase-desc">The OS stops being a place founders log into. It becomes a layer that surrounds the founder's working week. Foundation for the Year 2 vision is laid.</p>
+            <div class="deliverable"><div class="del-dot"></div><div class="del-body"><div class="del-name">Fireflies integration</div><div class="del-desc">Advisor call recap, action items, automatic update to founder profile post-call.</div></div></div>
+            <div class="deliverable"><div class="del-dot"></div><div class="del-body"><div class="del-name">Weekly Brief auto-delivery</div><div class="del-desc">Monday email + in-app brief: where you are, what slipped, next 3 actions. AI-generated.</div></div></div>
+            <div class="deliverable"><div class="del-dot"></div><div class="del-body"><div class="del-name">Peer cohort engine</div><div class="del-desc">Auto-formed groups of 5-8 founders at similar Scores and archetypes.</div></div></div>
+            <div class="deliverable"><div class="del-dot"></div><div class="del-body"><div class="del-name">Decision posts</div><div class="del-desc">Founders post real decisions. System surfaces peers, partners, AI analysis.</div></div></div>
+          </div>
+          <div class="exit-card">
+            <div class="exit-label">Exit Criteria</div>
+            <div class="exit-item"><div class="exit-check">✓</div>Weekly brief open rate above 40%</div>
+            <div class="exit-item"><div class="exit-check">✓</div>3+ active peer cohorts running</div>
+            <div class="exit-item"><div class="exit-check">✓</div>Credential and Capital arm scoped and funded</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════ -->
+<!-- SECTION: FUTURE VISION -->
+<!-- ════════════════════════════════════ -->
+<div id="future"></div>
+<div class="section-dark">
+  <div class="container">
+    <div class="sec-num white">07</div>
+    <div class="sec-tag white">Future Vision</div>
+    <h2 class="big white">What we can achieve <em>in the years ahead.</em></h2>
+    <p class="sec-lede white mt16">The Compass wedge is Month 1 through 12. What Eprenz becomes over years 2, 3, and beyond is a fundamentally different kind of company. Click each year to see the vision.</p>
+
+    <div class="year-tabs mt48">
+      <div class="yr-tab active" onclick="openYear('y1')">Year 1 · Compass</div>
+      <div class="yr-tab" onclick="openYear('y2')">Year 2 · Expand</div>
+      <div class="yr-tab" onclick="openYear('y3')">Year 3+ · Extend</div>
+    </div>
+
+    <div class="yr-panel active" id="yr-y1">
+      <ul class="yr-features">
+        <li class="yr-feature"><div class="yf-icon">◎</div><div class="yf-body"><div class="yf-name">Compass Wedge Full</div><div class="yf-desc">Assessment, Score, Path, Partner Triggers, Advisor Console, and Re-Assessment all live and monetizing. 5 phases complete.</div></div></li>
+        <li class="yr-feature"><div class="yf-icon">✦</div><div class="yf-body"><div class="yf-name">Atlas AI + 5 Specialists</div><div class="yf-desc">General co-founder agent free for all members. CFO, CMO, Sales, People, Legal agents behind Premium tier.</div></div></li>
+        <li class="yr-feature"><div class="yf-icon">🤝</div><div class="yf-body"><div class="yf-name">Partner Revenue Live</div><div class="yf-desc">3-5 partners on programmatic model. First closed deals under revenue share. Partner network producing real ROI for Eprenz.</div></div></li>
+        <li class="yr-feature"><div class="yf-icon">📊</div><div class="yf-body"><div class="yf-name">300+ Stage Scores</div><div class="yf-desc">300+ active founders with at least 3 months of Score history. First trajectory patterns visible. AI quality improving.</div></div></li>
+        <li class="yr-feature"><div class="yf-icon">📅</div><div class="yf-body"><div class="yf-name">Ambient OS Beginning</div><div class="yf-desc">Weekly Brief delivered every Monday. Peer cohorts formed. Decision posts seeded. OS becomes part of the founder's week.</div></div></li>
+      </ul>
+      <div class="yr-vision">
+        <div class="yr-vision-lbl">Year 1 Vision</div>
+        <div class="yr-vision-text">"Eprenz is the first platform where a founder's dashboard is actually about them, not a generic course library."</div>
+        <p style="font-size:14px;color:rgba(255,255,255,0.6);line-height:1.6;">The Compass wedge is the proof point. By Month 12, Eprenz has a working OS layer, partner revenue, an AI co-founder inside the product, and a Score dataset that no competitor can replicate.</p>
+        <div class="yr-metric">
+          <div class="ym"><div class="ym-val">300+</div><div class="ym-lbl">Active Scores</div></div>
+          <div class="ym"><div class="ym-val">6</div><div class="ym-lbl">Revenue Streams Started</div></div>
+          <div class="ym"><div class="ym-val">M6</div><div class="ym-lbl">Partner Revenue</div></div>
+          <div class="ym"><div class="ym-val">40%</div><div class="ym-lbl">Atlas Weekly Active Rate</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="yr-panel" id="yr-y2">
+      <ul class="yr-features">
+        <li class="yr-feature"><div class="yf-icon">🤖</div><div class="yf-body"><div class="yf-name">Persistent AI Co-Founder</div><div class="yf-desc">Atlas becomes truly persistent. Attends calls via Fireflies. Reviews financials weekly. Drafts board updates. Remembers everything across sessions.</div></div></li>
+        <li class="yr-feature"><div class="yf-icon">⚖️</div><div class="yf-body"><div class="yf-name">Decision Marketplace</div><div class="yf-desc">Founders post real decisions to the OS. AI surfaces analogous cases from Eprenz history. Peers who faced the same call respond. Decisions become the new unit of value.</div></div></li>
+        <li class="yr-feature"><div class="yf-icon">🏪</div><div class="yf-body"><div class="yf-name">Member Marketplace</div><div class="yf-desc">Founders hire each other inside the OS. Dev founder builds for retail founder. Eprenz takes a small transaction fee. Creates an economy within the ecosystem.</div></div></li>
+        <li class="yr-feature"><div class="yf-icon">👥</div><div class="yf-body"><div class="yf-name">Peer Cohort Engine Full</div><div class="yf-desc">50+ active cohorts of 5-8 founders. Auto-matched by Score, archetype, industry, geography. Weekly calls, shared milestones, accountability built into the OS.</div></div></li>
+        <li class="yr-feature"><div class="yf-icon">💰</div><div class="yf-body"><div class="yf-name">Capital Arm Launch</div><div class="yf-desc">Eprenz runs a fund powered by OS data. Members get capital access from inside the platform. Eprenz captures returns. First-of-its-kind data-driven founder fund.</div></div></li>
+      </ul>
+      <div class="yr-vision">
+        <div class="yr-vision-lbl">Year 2 Vision</div>
+        <div class="yr-vision-text">"Eprenz is where founders make decisions, not just learn content. The OS knows their business better than any advisor."</div>
+        <p style="font-size:14px;color:rgba(255,255,255,0.6);line-height:1.6;">By Year 2 Eprenz has evolved from a smart dashboard into a living business partner. The AI layer is no longer reactive (answering questions) but proactive (flagging risks, surfacing opportunities, connecting the right people at the right moment).</p>
+        <div class="yr-metric">
+          <div class="ym"><div class="ym-val">1K+</div><div class="ym-lbl">Active Scores</div></div>
+          <div class="ym"><div class="ym-val">50+</div><div class="ym-lbl">Active Cohorts</div></div>
+          <div class="ym"><div class="ym-val">Fund</div><div class="ym-lbl">Capital Arm Open</div></div>
+          <div class="ym"><div class="ym-val">3×</div><div class="ym-lbl">Revenue vs Y1</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="yr-panel" id="yr-y3">
+      <ul class="yr-features">
+        <li class="yr-feature"><div class="yf-icon">🪪</div><div class="yf-body"><div class="yf-name">Eprenz Credential</div><div class="yf-desc">"Eprenz Certified Founder, Grow Stage" recognized by banks, investors, and government schemes in India and APAC. Banks lend against it. Investors trust it. Membership becomes a professional qualification.</div></div></li>
+        <li class="yr-feature"><div class="yf-icon">🔑</div><div class="yf-body"><div class="yf-name">Sign-in with Eprenz</div><div class="yf-desc">Founder identity layer. Stage, Score, and journey travel with the founder across investor platforms, CRMs, banks, government portals. Eprenz becomes the founder's passport.</div></div></li>
+        <li class="yr-feature"><div class="yf-icon">🌐</div><div class="yf-body"><div class="yf-name">Public Protocol API</div><div class="yf-desc">Accelerators, VC firms, universities, banks integrate via Eprenz API. They white-label dashboards, read founder Scores, route their own members through the assessment. Eprenz becomes infrastructure.</div></div></li>
+        <li class="yr-feature"><div class="yf-icon">🏛️</div><div class="yf-body"><div class="yf-name">Default Rail for New Businesses</div><div class="yf-desc">When a company registers with MCA in India or Delaware in the US, an Eprenz account spins up automatically. Banks, accountants, government portals integrate via Eprenz. The OS becomes the default.</div></div></li>
+        <li class="yr-feature"><div class="yf-icon">♾️</div><div class="yf-body"><div class="yf-name">Network State for Founders</div><div class="yf-desc">Permanent citizenship, not subscriptions. Members earn lifetime status through contribution. The product is belonging to a system that gives them leverage across their entire entrepreneurial career.</div></div></li>
+      </ul>
+      <div class="yr-vision">
+        <div class="yr-vision-lbl">Year 3+ Vision</div>
+        <div class="yr-vision-text">"Eprenz is not a platform you join. It is a system you belong to. The operating layer of entrepreneurial life."</div>
+        <p style="font-size:14px;color:rgba(255,255,255,0.6);line-height:1.6;">At Year 3, Eprenz is no longer competing with community platforms or course tools. It is competing with LinkedIn, Stripe, and Salesforce — the infrastructure layers that all founders depend on. The Stage Score is trusted by the market. The identity layer travels everywhere. The data substrate is irreplicable.</p>
+        <div class="yr-metric">
+          <div class="ym"><div class="ym-val">10K+</div><div class="ym-lbl">Active Scores</div></div>
+          <div class="ym"><div class="ym-val">Global</div><div class="ym-lbl">Market</div></div>
+          <div class="ym"><div class="ym-val">6+</div><div class="ym-lbl">Revenue Streams</div></div>
+          <div class="ym"><div class="ym-val">Infra</div><div class="ym-lbl">Not Software</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════ -->
+<!-- SECTION: WHY IT WINS -->
+<!-- ════════════════════════════════════ -->
+<div id="why"></div>
+<div class="section">
+  <div class="sec-num">08</div>
+  <div class="sec-tag">Why It Wins</div>
+  <h2 class="big">Three compounding <em>mechanisms.</em></h2>
+  <p class="sec-lede mt16">Most platforms are sums. Eprenz OS is a multiplier. Each year of operation makes the next year more defensible. This is what makes it a 10-year bet, not a product launch.</p>
+
+  <div class="compound-grid mt48">
+    <div class="compound-card">
+      <div class="compound-num">01</div>
+      <h4>Data compounds the AI.</h4>
+      <p>The first 100 founders make Atlas useful. The first 1,000 make it indispensable. By Year 3, Eprenz holds founder outcome data that no competitor can replicate — because it comes from thousands of real journeys inside the OS. AI trained on this data outperforms any general LLM for founder questions. That gap grows every week.</p>
+    </div>
+    <div class="compound-card">
+      <div class="compound-num">02</div>
+      <h4>Outcomes prove the partners.</h4>
+      <p>Each closed partner deal teaches the trigger engine which partners actually deliver. Bad partners get filtered out. Good partners earn priority placement. The network curates itself based on real founder outcomes, not editorial judgment. Partners stay because they get qualified leads. Founders stay because partners deliver. Both loops reinforce each other.</p>
+    </div>
+    <div class="compound-card">
+      <div class="compound-num">03</div>
+      <h4>Trajectories de-risk capital.</h4>
+      <p>Once 500+ founders have 12 months of Stage Score history, Eprenz knows which trajectories lead to which outcomes. The Capital arm invests only in founders whose Score curve proves they're on track. Lower risk, higher returns, a defensible investment thesis that no other fund has — because no other fund has the data.</p>
+    </div>
+  </div>
+
+  <div class="mt48">
+    <h3 style="font-size:22px;font-weight:700;color:var(--text);margin-bottom:24px;">The moat that builds over time</h3>
+    <div class="grid2">
+      <div class="card">
+        <h4 class="card-title">The Score is the moat.</h4>
+        <p class="body mt8">Once the Eprenz Stage Score is trusted by partners, banks, and investors, it becomes a switching cost. Founders cannot take their Score to a competitor. Every week inside Eprenz adds signal that improves their Score and their position. Leaving means starting over.</p>
+      </div>
+      <div class="card">
+        <h4 class="card-title">The graph is the moat.</h4>
+        <p class="body mt8">Founder-to-founder relationships, founder-to-partner deals, founder-to-advisor calls — all captured inside the OS. After 3 years this relationship graph is the most comprehensive founder network data in APAC. No new entrant can replicate it without years of operation.</p>
+      </div>
+      <div class="card">
+        <h4 class="card-title">The IP is the moat.</h4>
+        <p class="body mt8">David Wagstaff's Start/Grow/Profit framework, the MN curriculum, the Eprenz advisor playbook — all embedded into the AI agents. Atlas speaks in Eprenz's voice and references Eprenz's frameworks. Competitors can build AI chatbots. They cannot build an AI trained on 10 years of Eprenz IP.</p>
+      </div>
+      <div class="card">
+        <h4 class="card-title">The India/APAC depth is the moat.</h4>
+        <p class="body mt8">Most founder platforms are US-centric and shallow on local context. GST, MSME schemes, IEC, FEMA, ESOP rules, family business dynamics, tier-2 and 3 market realities — Eprenz goes deep where global platforms are weakest. This is a defensible position that does not require outspending global incumbents.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout mt48">
+    <p>The value of Eprenz OS is not any individual feature. It is that <em>the system gets smarter every week</em> — and the founders, partners, and advisors inside it get more leverage because of it.</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Eprenz<span>.</span></div>
+  <div class="footer-tag">The OS For Entrepreneurial Life</div>
+  <div class="footer-links">
+    <span class="footer-link" onclick="scrollTo('overview')">Overview</span>
+    <span class="footer-link" onclick="scrollTo('product')">Product</span>
+    <span class="footer-link" onclick="scrollTo('ai')">Atlas AI</span>
+    <span class="footer-link" onclick="scrollTo('architecture')">Architecture</span>
+    <span class="footer-link" onclick="scrollTo('business')">Business Model</span>
+    <span class="footer-link" onclick="scrollTo('roadmap')">Roadmap</span>
+    <span class="footer-link" onclick="scrollTo('future')">Future Vision</span>
+    <span class="footer-link" onclick="window.open('eprenz_prototype.html','_blank')">Open Prototype →</span>
+  </div>
+  <div class="footer-copy">Prepared by Mohammed Owais · Eprenz · June 2026 · Confidential</div>
+</footer>
+
+<script>
+// Scroll navigation
+function scrollTo(id){
+  const el=document.getElementById(id);
+  if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// Tab system
+function openTab(id){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// Year tabs
+function openYear(id){
+  document.querySelectorAll('.yr-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.yr-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('yr-'+id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// Phase accordion
+function togglePhase(card){
+  const isOpen=card.classList.contains('open');
+  document.querySelectorAll('.phase-card').forEach(c=>c.classList.remove('open'));
+  document.querySelectorAll('.phase-head').forEach(h=>h.classList.remove('open'));
+  if(!isOpen){
+    card.classList.add('open');
+    card.querySelector('.phase-head').classList.add('open');
+  }
+}
+
+// Scrollspy
+const sections=['overview','product','ai','architecture','business','roadmap','future','why'];
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
+      const idx=sections.indexOf(id);
+      if(idx>=0){
+        const links=document.querySelectorAll('.nav-link');
+        if(links[idx])links[idx].classList.add('active');
+      }
+    }
+  });
+},{threshold:0.15});
+sections.forEach(id=>{const el=document.getElementById(id);if(el)observer.observe(el);});
+
+// Animated counters
+const counterObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting&&!e.target.dataset.done){
+      e.target.dataset.done='1';
+      const target=parseInt(e.target.dataset.target)||0;
+      const suffix=e.target.dataset.suffix||'';
+      const dur=1200;const step=16;const steps=dur/step;
+      let cur=0;
+      const timer=setInterval(()=>{
+        cur+=target/steps;
+        if(cur>=target){cur=target;clearInterval(timer);}
+        e.target.textContent=Math.round(cur)+suffix;
+      },step);
+    }
+  });
+},{threshold:0.5});
+document.querySelectorAll('.counter').forEach(el=>counterObs.observe(el));
+
+// Open first phase by default
+document.querySelector('.phase-card')&&togglePhase(document.querySelector('.phase-card'));
+</script>
+</body>
+</html>
