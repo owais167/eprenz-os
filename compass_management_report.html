@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eprenz Compass — Management Report</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --bg-secondary: #f7f7f5;
+      --bg-tertiary: #f1f0ec;
+      --text: #1a1a1a;
+      --text-secondary: #6b6b68;
+      --border: rgba(0,0,0,0.12);
+      --border-hover: rgba(0,0,0,0.22);
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --blue: #185FA5;
+      --blue-bg: #E6F1FB;
+      --green: #3B6D11;
+      --green-bg: #EAF3DE;
+      --amber: #854F0B;
+      --amber-bg: #FAEEDA;
+      --purple: #534AB7;
+      --purple-bg: #EEEDFE;
+      --teal: #0F6E56;
+      --teal-bg: #E1F5EE;
+      --gray: #5F5E5A;
+      --gray-bg: #F1EFE8;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1c1c1a;
+        --bg-secondary: #252523;
+        --bg-tertiary: #2e2e2b;
+        --text: #f0ede8;
+        --text-secondary: #9b9994;
+        --border: rgba(255,255,255,0.1);
+        --border-hover: rgba(255,255,255,0.2);
+        --blue: #85B7EB;
+        --blue-bg: #042C53;
+        --green: #97C459;
+        --green-bg: #173404;
+        --amber: #EF9F27;
+        --amber-bg: #412402;
+        --purple: #AFA9EC;
+        --purple-bg: #26215C;
+        --teal: #5DCAA5;
+        --teal-bg: #04342C;
+        --gray: #B4B2A9;
+        --gray-bg: #2C2C2A;
+      }
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg-tertiary);
+      color: var(--text);
+      line-height: 1.65;
+      font-size: 15px;
+    }
+
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    .header {
+      margin-bottom: 40px;
+    }
+
+    .header h1 {
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .header p {
+      color: var(--text-secondary);
+      font-size: 15px;
+    }
+
+    .header-meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .pill {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    .pill-blue   { background: var(--blue-bg);   color: var(--blue);   }
+    .pill-green  { background: var(--green-bg);  color: var(--green);  }
+    .pill-amber  { background: var(--amber-bg);  color: var(--amber);  }
+    .pill-purple { background: var(--purple-bg); color: var(--purple); }
+    .pill-teal   { background: var(--teal-bg);   color: var(--teal);   }
+    .pill-gray   { background: var(--gray-bg);   color: var(--gray);   }
+
+    .section {
+      margin-bottom: 48px;
+    }
+
+    .section-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .card {
+      background: var(--bg);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+    }
+
+    .card p { color: var(--text); }
+
+    .card + .card { margin-top: 12px; }
+
+    .intro-card p {
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+
+    /* Questions grid */
+    .q-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 10px;
+    }
+
+    .q-card {
+      background: var(--bg);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+    }
+
+    .q-num {
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .q-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .q-tag {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* Dimensions */
+    .dim-table { width: 100%; }
+    .dim-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .dim-row:last-child { margin-bottom: 0; }
+    .dim-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      width: 90px;
+      flex-shrink: 0;
+    }
+    .dim-bar-bg {
+      flex: 1;
+      height: 8px;
+      background: var(--bg-secondary);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .dim-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+    }
+    .dim-max {
+      font-size: 12px;
+      color: var(--text-secondary);
+      width: 40px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .dim-sources {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .dim-source-item {
+      background: var(--bg-secondary);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+    }
+
+    .dim-source-label {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+
+    .dim-source-val {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    /* Simulator */
+    .sim-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    @media (max-width: 600px) {
+      .sim-layout { grid-template-columns: 1fr; }
+      .dim-sources { grid-template-columns: 1fr; }
+    }
+
+    .sim-control { margin-bottom: 18px; }
+
+    .sim-control-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+
+    .sim-control-label strong {
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    input[type=range] {
+      width: 100%;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 4px;
+      background: var(--border-hover);
+      border-radius: 2px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #185FA5;
+      cursor: pointer;
+      border: 2px solid var(--bg);
+      box-shadow: 0 0 0 1px rgba(24,95,165,0.4);
+    }
+
+    .score-display {
+      text-align: center;
+      padding: 24px;
+      background: var(--bg);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      margin-bottom: 14px;
+    }
+
+    .score-number {
+      font-size: 48px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .score-label {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 6px;
+    }
+
+    .stage-track {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .stage-box {
+      flex: 1;
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 8px;
+      text-align: center;
+      transition: all .2s ease;
+    }
+
+    .stage-box.active {
+      border: 2px solid var(--blue);
+      background: var(--blue-bg);
+    }
+
+    .stage-name {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .stage-box.active .stage-name { color: var(--blue); }
+
+    .stage-range {
+      font-size: 10px;
+      color: var(--text-secondary);
+    }
+
+    .stage-box.active .stage-range { color: var(--blue); }
+
+    /* Stages detail */
+    .stages-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 500px) {
+      .stages-grid { grid-template-columns: 1fr; }
+    }
+
+    .stage-detail-card {
+      background: var(--bg);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 16px 18px;
+    }
+
+    .stage-detail-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .stage-detail-name {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .stage-detail-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Rule callout */
+    .rule-callout {
+      background: var(--bg);
+      border-left: 3px solid var(--blue);
+      padding: 14px 18px;
+      margin-top: 14px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text);
+    }
+
+    /* Flow */
+    .flow-steps {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .flow-step {
+      background: var(--bg);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 8px 12px;
+      font-size: 13px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .flow-arrow {
+      color: var(--text-secondary);
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .flow-note {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 12px;
+      line-height: 1.65;
+    }
+
+    /* Powers grid */
+    .powers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 10px;
+    }
+
+    .power-card {
+      background: var(--bg);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+    }
+
+    .power-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .power-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* divider */
+    .divider {
+      border: none;
+      border-top: 0.5px solid var(--border);
+      margin: 48px 0;
+    }
+
+    .sim-dim-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 9px;
+    }
+
+    .sim-dim-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text);
+      width: 80px;
+      flex-shrink: 0;
+    }
+
+    .sim-dim-bar-bg {
+      flex: 1;
+      height: 6px;
+      background: var(--bg-secondary);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .sim-dim-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width .3s ease;
+    }
+
+    .sim-dim-val {
+      font-size: 11px;
+      color: var(--text-secondary);
+      width: 30px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <div class="header">
+      <h1>Eprenz Compass</h1>
+      <p>How the survey works — Internal Team</p>
+      <div class="header-meta">
+        <span class="pill pill-blue">10 questions</span>
+        <span class="pill pill-green">0–1,000 score</span>
+        <span class="pill pill-purple">4 stages</span>
+        <span class="pill pill-teal">~3 min to complete</span>
+      </div>
+    </div>
+
+    <!-- WHAT IS IT -->
+    <div class="section">
+      <p class="section-title">What is the Compass?</p>
+      <div class="card intro-card">
+        <p>The Compass is a 10-question survey that every new member completes when they sign up. It takes roughly 3 minutes.</p>
+        <p>At the end, the platform assigns each member an <strong>Eprenz Score</strong> (0–1,000) and a <strong>Stage</strong>. Everything else in the app — their personalised path, partner matches, Atlas AI advice, and goals — is built on this score.</p>
+        <p style="margin-bottom:0;">Members cannot access the main dashboard until the Compass is complete. If they leave mid-survey, their progress is saved and they resume from where they left off on next login.</p>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- THE 10 QUESTIONS -->
+    <div class="section">
+      <p class="section-title">The 10 questions</p>
+      <div class="q-grid">
+        <div class="q-card">
+          <div class="q-num">Q1</div>
+          <div class="q-title">Business stage</div>
+          <div class="q-tag">Self-perception only — no score points. Used as a tiebreaker.</div>
+        </div>
+        <div class="q-card">
+          <div class="q-num">Q2</div>
+          <div class="q-title">How many businesses do you own?</div>
+          <div class="q-tag">Measures founder experience. Up to 50 pts.</div>
+        </div>
+        <div class="q-card">
+          <div class="q-num">Q3</div>
+          <div class="q-title">Annual revenue</div>
+          <div class="q-tag">Biggest single lever. Up to 340 pts across two dimensions.</div>
+        </div>
+        <div class="q-card">
+          <div class="q-num">Q4</div>
+          <div class="q-title">Team size</div>
+          <div class="q-tag">Measures ability to delegate and scale. Up to 200 pts.</div>
+        </div>
+        <div class="q-card">
+          <div class="q-num">Q5</div>
+          <div class="q-title">Biggest challenge right now</div>
+          <div class="q-tag">Tags used for partner and advisor matching downstream.</div>
+        </div>
+        <div class="q-card" style="opacity:.75">
+          <div class="q-num">Q6 <span class="pill pill-gray" style="margin-left:4px;">optional</span></div>
+          <div class="q-title">Cost of that challenge</div>
+          <div class="q-tag">Execution awareness signal. Up to 50 pts.</div>
+        </div>
+        <div class="q-card" style="opacity:.75">
+          <div class="q-num">Q7 <span class="pill pill-gray" style="margin-left:4px;">optional</span></div>
+          <div class="q-title">Support areas wanted</div>
+          <div class="q-tag">Multi-select. Shapes recommendations and adds small bonus pts per selection.</div>
+        </div>
+        <div class="q-card">
+          <div class="q-num">Q8</div>
+          <div class="q-title">Invested in business last 90 days?</div>
+          <div class="q-tag">Strongest execution signal. Up to 200 pts.</div>
+        </div>
+        <div class="q-card" style="opacity:.75">
+          <div class="q-num">Q9 <span class="pill pill-gray" style="margin-left:4px;">optional</span></div>
+          <div class="q-title">Open to partner matches?</div>
+          <div class="q-tag">Network openness signal. Up to 15 pts.</div>
+        </div>
+        <div class="q-card">
+          <div class="q-num">Q10</div>
+          <div class="q-title">Monthly investment capacity</div>
+          <div class="q-tag">Closes the profile. Up to 280 pts across two dimensions.</div>
+        </div>
+      </div>
+      <p style="font-size:13px; color: var(--text-secondary); margin-top: 12px;">Optional questions (Q6, Q7, Q9) show a "Skip" button. Answering them can add meaningful points — particularly for borderline stage decisions — but skipping doesn't block the member from proceeding.</p>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- DIMENSIONS -->
+    <div class="section">
+      <p class="section-title">The 5 score dimensions</p>
+      <div class="card" style="margin-bottom: 16px;">
+        <p style="font-size:14px; color: var(--text-secondary); margin-bottom: 16px;">Each question feeds into one or more of these five buckets. Each bucket is capped at 200 points. Total maximum = 1,000.</p>
+        <div class="dim-row">
+          <span class="dim-label">Business</span>
+          <div class="dim-bar-bg"><div class="dim-bar-fill" style="width:100%; background:#378ADD;"></div></div>
+          <span class="dim-max">200 pts</span>
+        </div>
+        <div class="dim-row">
+          <span class="dim-label">Market</span>
+          <div class="dim-bar-bg"><div class="dim-bar-fill" style="width:100%; background:#3B6D11;"></div></div>
+          <span class="dim-max">200 pts</span>
+        </div>
+        <div class="dim-row">
+          <span class="dim-label">Founder</span>
+          <div class="dim-bar-bg"><div class="dim-bar-fill" style="width:100%; background:#534AB7;"></div></div>
+          <span class="dim-max">200 pts</span>
+        </div>
+        <div class="dim-row">
+          <span class="dim-label">Execution</span>
+          <div class="dim-bar-bg"><div class="dim-bar-fill" style="width:100%; background:#854F0B;"></div></div>
+          <span class="dim-max">200 pts</span>
+        </div>
+        <div class="dim-row" style="margin-bottom:0">
+          <span class="dim-label">Team</span>
+          <div class="dim-bar-bg"><div class="dim-bar-fill" style="width:100%; background:#0F6E56;"></div></div>
+          <span class="dim-max">200 pts</span>
+        </div>
+      </div>
+      <div class="dim-sources">
+        <div class="dim-source-item">
+          <div class="dim-source-label">Revenue (Q3) drives Business + Market</div>
+          <div class="dim-source-val">Up to 340 raw pts</div>
+        </div>
+        <div class="dim-source-item">
+          <div class="dim-source-label">90-day investment (Q8) drives Execution</div>
+          <div class="dim-source-val">Up to 200 pts</div>
+        </div>
+        <div class="dim-source-item">
+          <div class="dim-source-label">Monthly capacity (Q10) drives Market + Founder</div>
+          <div class="dim-source-val">Up to 280 pts</div>
+        </div>
+        <div class="dim-source-item">
+          <div class="dim-source-label">Team size (Q4) drives Team</div>
+          <div class="dim-source-val">Up to 200 pts</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- SIMULATOR -->
+    <div class="section">
+      <p class="section-title">Score simulator — try different member profiles</p>
+      <div class="sim-layout">
+        <div>
+          <div class="sim-control">
+            <div class="sim-control-label"><span>Revenue</span><strong id="rev-lbl">$150K–$500K</strong></div>
+            <input type="range" id="rev-sl" min="0" max="6" step="1" value="3" />
+          </div>
+          <div class="sim-control">
+            <div class="sim-control-label"><span>Team size</span><strong id="team-lbl">1–10 employees</strong></div>
+            <input type="range" id="team-sl" min="0" max="5" step="1" value="2" />
+          </div>
+          <div class="sim-control">
+            <div class="sim-control-label"><span>90-day investment</span><strong id="inv-lbl">$501–$2,500</strong></div>
+            <input type="range" id="inv-sl" min="0" max="5" step="1" value="2" />
+          </div>
+          <div class="sim-control">
+            <div class="sim-control-label"><span>Monthly capacity</span><strong id="cap-lbl">$251–$850</strong></div>
+            <input type="range" id="cap-sl" min="0" max="6" step="1" value="3" />
+          </div>
+          <div class="sim-control">
+            <div class="sim-control-label"><span>Businesses owned</span><strong id="own-lbl">1 business</strong></div>
+            <input type="range" id="own-sl" min="0" max="3" step="1" value="1" />
+          </div>
+        </div>
+        <div>
+          <div class="score-display">
+            <div class="score-number" id="sim-total">385</div>
+            <div class="score-label">Eprenz score out of 1,000</div>
+          </div>
+          <div class="stage-track" id="stage-track"></div>
+          <div id="sim-dim-bars"></div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- STAGES -->
+    <div class="section">
+      <p class="section-title">The 4 stages</p>
+      <div class="stages-grid">
+        <div class="stage-detail-card">
+          <div class="stage-detail-head">
+            <span class="stage-detail-name">Start</span>
+            <span class="pill pill-blue">0–249</span>
+          </div>
+          <p class="stage-detail-desc">Idea stage through first revenue. Focus on getting customers and proving the model.</p>
+        </div>
+        <div class="stage-detail-card">
+          <div class="stage-detail-head">
+            <span class="stage-detail-name">Grow</span>
+            <span class="pill pill-green">250–499</span>
+          </div>
+          <p class="stage-detail-desc">Selling consistently. Building systems and team. Focus on scaling what works.</p>
+        </div>
+        <div class="stage-detail-card">
+          <div class="stage-detail-head">
+            <span class="stage-detail-name">Profit</span>
+            <span class="pill pill-purple">500–749</span>
+          </div>
+          <p class="stage-detail-desc">Profitable with strong systems. Focus on margins, cash flow, and strategic moves.</p>
+        </div>
+        <div class="stage-detail-card">
+          <div class="stage-detail-head">
+            <span class="stage-detail-name">Exit</span>
+            <span class="pill pill-teal">750–1,000</span>
+          </div>
+          <p class="stage-detail-desc">Building toward exit or succession. Focus on business value and transition planning.</p>
+        </div>
+      </div>
+      <div class="rule-callout">
+        <strong>One important rule:</strong> A member's self-perception (Q1) can pull their assigned stage down by at most one step — it can never push it higher. If the data says Grow but the member says Start, they land in Start. If the data says Profit but the member says Start, they still land in Grow. This prevents gaming the survey.
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- FLOW -->
+    <div class="section">
+      <p class="section-title">Member journey</p>
+      <div class="flow-steps">
+        <div class="flow-step">Signs up</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step">Completes Compass (10 questions)</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step">Score revealed</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step">Stage assigned</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step">Dashboard unlocked</div>
+      </div>
+      <p class="flow-note">Answers and scores are saved to the database permanently. If a member quits mid-survey, they resume from their last answered question on next login. The score is recalculated fresh on final submission.</p>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- WHAT IT POWERS -->
+    <div class="section">
+      <p class="section-title">What the score powers</p>
+      <div class="powers-grid">
+        <div class="power-card">
+          <div class="power-title">Journey path</div>
+          <div class="power-desc">Stage-matched milestones and personalised action plan</div>
+        </div>
+        <div class="power-card">
+          <div class="power-title">Partner matching</div>
+          <div class="power-desc">Matched by challenge tags collected in Q5</div>
+        </div>
+        <div class="power-card">
+          <div class="power-title">Atlas AI</div>
+          <div class="power-desc">AI advice calibrated to their exact stage and gaps</div>
+        </div>
+        <div class="power-card">
+          <div class="power-title">Goals</div>
+          <div class="power-desc">Goal suggestions based on which dimensions score lowest</div>
+        </div>
+        <div class="power-card">
+          <div class="power-title">Business pulse</div>
+          <div class="power-desc">Benchmarks the member against their stage peers</div>
+        </div>
+        <div class="power-card">
+          <div class="power-title">Learning content</div>
+          <div class="power-desc">Resources filtered by stage and challenge areas</div>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-size:12px; color: var(--text-secondary); text-align: center; margin-top: 24px;">Eprenz OS — Compass logic reference · For internal use</p>
+  </div>
+
+  <script>
+    const revData = [
+      { lbl: 'No revenue', pts: { business: 0, market: 0 } },
+      { lbl: 'Under $50K', pts: { business: 30, market: 10 } },
+      { lbl: '$50K–$150K', pts: { business: 70, market: 30 } },
+      { lbl: '$150K–$500K', pts: { business: 110, market: 55 } },
+      { lbl: '$500K–$1M', pts: { business: 150, market: 80 } },
+      { lbl: '$1M–$7.5M', pts: { business: 175, market: 110 } },
+      { lbl: 'Over $7.5M', pts: { business: 200, market: 140 } },
+    ];
+    const teamData = [
+      { lbl: 'Solo', pts: { team: 0 } },
+      { lbl: 'Freelancers only', pts: { team: 20 } },
+      { lbl: '1–10 employees', pts: { team: 70 } },
+      { lbl: '11–50 employees', pts: { team: 130 } },
+      { lbl: '51–100 employees', pts: { team: 170 } },
+      { lbl: '100+ employees', pts: { team: 200 } },
+    ];
+    const invData = [
+      { lbl: '$0 invested', pts: { execution: 0 } },
+      { lbl: '$1–$500', pts: { execution: 30 } },
+      { lbl: '$501–$2,500', pts: { execution: 65 } },
+      { lbl: '$2,501–$25K', pts: { execution: 110 } },
+      { lbl: '$25K–$100K', pts: { execution: 155 } },
+      { lbl: 'Over $100K', pts: { execution: 200 } },
+    ];
+    const capData = [
+      { lbl: 'Not ready', pts: { market: 0, founder: 0 } },
+      { lbl: '$1–$25/mo', pts: { market: 10, founder: 10 } },
+      { lbl: '$26–$250/mo', pts: { market: 30, founder: 30 } },
+      { lbl: '$251–$850/mo', pts: { market: 60, founder: 60 } },
+      { lbl: '$851–$2,500/mo', pts: { market: 90, founder: 90 } },
+      { lbl: '$2,501–$10K/mo', pts: { market: 115, founder: 115 } },
+      { lbl: '$10K+/mo', pts: { market: 140, founder: 140 } },
+    ];
+    const ownData = [
+      { lbl: 'No business', pts: { founder: 0 } },
+      { lbl: '1 business', pts: { founder: 20 } },
+      { lbl: '2–3 businesses', pts: { founder: 35 } },
+      { lbl: '4+ businesses', pts: { founder: 50 } },
+    ];
+
+    const dimColors = {
+      business: '#378ADD',
+      market: '#3B6D11',
+      founder: '#534AB7',
+      execution: '#854F0B',
+      team: '#0F6E56',
+    };
+
+    const stages = [
+      { name: 'Start', min: 0, max: 249 },
+      { name: 'Grow', min: 250, max: 499 },
+      { name: 'Profit', min: 500, max: 749 },
+      { name: 'Exit', min: 750, max: 1000 },
+    ];
+
+    function compute() {
+      const rev  = revData[+document.getElementById('rev-sl').value].pts;
+      const team = teamData[+document.getElementById('team-sl').value].pts;
+      const inv  = invData[+document.getElementById('inv-sl').value].pts;
+      const cap  = capData[+document.getElementById('cap-sl').value].pts;
+      const own  = ownData[+document.getElementById('own-sl').value].pts;
+
+      const dims = { business: 0, market: 0, founder: 0, execution: 0, team: 0 };
+      [rev, team, inv, cap, own].forEach(p =>
+        Object.entries(p).forEach(([k, v]) => dims[k] = Math.min(200, dims[k] + v))
+      );
+      const total = Object.values(dims).reduce((a, b) => a + b, 0);
+      return { dims, total };
+    }
+
+    function render() {
+      document.getElementById('rev-lbl').textContent  = revData[+document.getElementById('rev-sl').value].lbl;
+      document.getElementById('team-lbl').textContent = teamData[+document.getElementById('team-sl').value].lbl;
+      document.getElementById('inv-lbl').textContent  = invData[+document.getElementById('inv-sl').value].lbl;
+      document.getElementById('cap-lbl').textContent  = capData[+document.getElementById('cap-sl').value].lbl;
+      document.getElementById('own-lbl').textContent  = ownData[+document.getElementById('own-sl').value].lbl;
+
+      const { dims, total } = compute();
+      document.getElementById('sim-total').textContent = total;
+
+      const stageIdx = total >= 750 ? 3 : total >= 500 ? 2 : total >= 250 ? 1 : 0;
+
+      document.getElementById('stage-track').innerHTML = stages.map((s, i) =>
+        `<div class="stage-box${i === stageIdx ? ' active' : ''}">
+          <div class="stage-name">${s.name}</div>
+          <div class="stage-range">${s.min}–${s.max}</div>
+        </div>`
+      ).join('');
+
+      document.getElementById('sim-dim-bars').innerHTML = Object.entries(dims).map(([k, v]) =>
+        `<div class="sim-dim-row">
+          <span class="sim-dim-label">${k.charAt(0).toUpperCase() + k.slice(1)}</span>
+          <div class="sim-dim-bar-bg">
+            <div class="sim-dim-bar-fill" style="width:${Math.round(v / 2)}%; background:${dimColors[k]};"></div>
+          </div>
+          <span class="sim-dim-val">${v}</span>
+        </div>`
+      ).join('');
+    }
+
+    ['rev-sl','team-sl','inv-sl','cap-sl','own-sl'].forEach(id =>
+      document.getElementById(id).addEventListener('input', render)
+    );
+
+    render();
+  </script>
+</body>
+</html>
